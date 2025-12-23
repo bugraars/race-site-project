@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "coords": [30.5744, 36.6015],
+    "elevation": "0m",
+    "difficulty": 1,
+    "img": "https://images.pexels.com/photos/16930500/pexels-photo-16930500.jpeg?_gl=1*rhbxhi*_ga*NTg0MzAxNzcuMTc2NjQyNTEzNg..*_ga_8JE65Q40S6*czE3NjY0ODU2MTQkbzYkZzEkdDE3NjY0ODU2MjckajQ3JGwwJGgw",
+    "title": { "tr": "Kemer Marina Start", "en": "Kemer Marina Start", "de": "Kemer Marina Start", "ru": "Кемер Марина Старт" },
+    "desc": { "tr": "Yarışın deniz seviyesinden başladığı nokta.", "en": "The point where the race starts from sea level.", "de": "Der Punkt, an dem das Rennen auf Meereshöhe beginnt.", "ru": "Точка, где гонка начинается с уровня моря." }
+  },
+  {
+    "id": 2,
+    "coords": [30.5850, 36.5920],
+    "elevation": "320m",
+    "difficulty": 2,
+    "img": "https://placehold.co/800x600/222/a3e635?text=Calistepe",
+    "title": { "tr": "Çalıştepe Tırmanışı", "en": "Çalıştepe Climb", "de": "Çalıştepe Aufstieg", "ru": "Подъем Чалыштепе" },
+    "desc": { "tr": "Kemer manzarasına karşı ilk sert tırmanış.", "en": "The first hard climb against the view of Kemer.", "de": "Der erste harte Aufstieg mit Blick auf Kemer.", "ru": "Первый сложный подъем с видом на Кемер." }
+  },
+  {
+    "id": 3,
+    "coords": [30.5315, 36.6065],
+    "elevation": "150m",
+    "difficulty": 2,
+    "img": "https://placehold.co/800x600/333/a3e635?text=Kesme+Bogazi",
+    "title": { "tr": "Kesme Boğazı Kanyonu", "en": "Kesme Gorge Canyon", "de": "Kesme-Schlucht-Canyon", "ru": "Каньон Кесме Богазы" },
+    "desc": { "tr": "Kanyon içinden geçen serin ama teknik bir etap.", "en": "A cool but technical stage passing through the canyon.", "de": "Eine kühle, aber technische Etappe durch den Canyon.", "ru": "Прохладный, но техничный этап, проходящий через каньон." }
+  },
+  {
+    "id": 4,
+    "coords": [30.4710, 36.6110],
+    "elevation": "700m",
+    "difficulty": 1,
+    "img": "https://placehold.co/800x600/444/a3e635?text=Gedelme",
+    "title": { "tr": "Gedelme Kontrol Noktası", "en": "Gedelme Checkpoint", "de": "Gedelme Kontrollpunkt", "ru": "Контрольная точка Гедельме" },
+    "desc": { "tr": "Tarihi çınar ağaçları arasında yakıt ikmali noktası.", "en": "Refueling point among historical plane trees.", "de": "Tankstelle zwischen historischen Platane.", "ru": "Пункт дозаправки среди исторических платанов." }
+  },
+  {
+    "id": 5,
+    "coords": [30.4350, 36.5750],
+    "elevation": "950m",
+    "difficulty": 3,
+    "img": "https://placehold.co/800x600/555/a3e635?text=Kuzdere",
+    "title": { "tr": "Kuzdere Geçidi", "en": "Kuzdere Pass", "de": "Kuzdere-Pass", "ru": "Перевал Куздере" },
+    "desc": { "tr": "Büyük kaya bloklarının olduğu dar geçit.", "en": "Narrow pass with large rock blocks.", "de": "Enger Pass mit großen Felsblöcken.", "ru": "Узкий проход с большими каменными блоками." }
+  },
+  {
+    "id": 6,
+    "coords": [30.4120, 36.5610],
+    "elevation": "1200m",
+    "difficulty": 1,
+    "img": "https://placehold.co/800x600/666/a3e635?text=Yaylakuzdere",
+    "title": { "tr": "Yaylakuzdere Platosu", "en": "Yaylakuzdere Plateau", "de": "Yaylakuzdere-Plateau", "ru": "Плато Яйлакуздере" },
+    "desc": { "tr": "1000 metre üzerindeki ilk yayla düzlüğü.", "en": "The first plateau above 1000 meters.", "de": "Das erste Plateau über 1000 Meter.", "ru": "Первое плато на высоте более 1000 метров." }
+  },
+  {
+    "id": 7,
+    "coords": [30.3850, 36.5450],
+    "elevation": "1650m",
+    "difficulty": 2,
+    "img": "https://placehold.co/800x600/777/a3e635?text=Cukuryayla",
+    "title": { "tr": "Çukuryayla Sedir Ormanı", "en": "Çukuryayla Cedar Forest", "de": "Çukuryayla Zedernwald", "ru": "Кедровый лес Чукуряйла" },
+    "desc": { "tr": "Asırlık sedir ağaçları arasında nemli zemin.", "en": "Humid ground among century-old cedar trees.", "de": "Feuchter Boden zwischen jahrhundertealten Zedern.", "ru": "Влажная почва среди вековых кедров." }
+  },
+  {
+    "id": 8,
+    "coords": [30.3550, 36.5380],
+    "elevation": "1900m",
+    "difficulty": 3,
+    "img": "https://placehold.co/800x600/888/a3e635?text=Silverline",
+    "title": { "tr": "Gümüş Hat Sırtı", "en": "Silverline Ridge", "de": "Silverline Grat", "ru": "Хребет Сильверлайн" },
+    "desc": { "tr": "Zirve öncesi son keskin sırt geçişi.", "en": "Last sharp ridge before the summit.", "de": "Letzter scharfer Grat vor dem Gipfel.", "ru": "Последний острый гребень перед вершиной." }
+  },
+  {
+    "id": 9,
+    "coords": [30.3390, 36.5350],
+    "elevation": "2150m",
+    "difficulty": 2,
+    "img": "https://placehold.co/800x600/999/a3e635?text=Teleferik",
+    "title": { "tr": "Teleferik İstasyonu", "en": "Cable Car Station", "de": "Seilbahnstation", "ru": "Станция канатной дороги" },
+    "desc": { "tr": "Zirveye ramak kala rüzgarlı etap.", "en": "Windy stage just before the summit.", "de": "Windige Etappe kurz vor dem Gipfel.", "ru": "Ветреный этап прямо перед вершиной." }
+  },
+  {
+    "id": 10,
+    "coords": [30.3340, 36.5345],
+    "elevation": "2365m",
+    "difficulty": 3,
+    "img": "https://placehold.co/800x600/000/a3e635?text=Summit+Finish",
+    "title": { "tr": "Tahtalı Zirve Finiş", "en": "Tahtalı Summit Finish", "de": "Tahtalı Gipfel Ziel", "ru": "Финиш на вершине Тахталы" },
+    "desc": { "tr": "Bulutların üzerindeki bitiş çizgisi.", "en": "The finish line above the clouds.", "de": "Die Ziellinie über den Wolken.", "ru": "Финишная черта над облаками." }
+  }
+]

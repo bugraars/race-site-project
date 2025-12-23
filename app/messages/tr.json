@@ -5,6 +5,9 @@
     "contact": "İletişim"
   },
   "Home": {
+    "race_track_title": "Yarış",
+    "race_track_title_span": "Etapları",
+    "race_track_subtitle": "Önünüzdeki zorlukları 3D uydu görünümüyle keşfedin",
     "announcement": "Ön kayıtlar başladı! Kaçırmayın",
     "apply": "Hemen Başvur",
     "title": "HARD ENDURO",
@@ -15,6 +18,8 @@
     "about_title_2": "DITROCKS",
     "about_category": "HARD ENDURO",
     "about_description": "İsim, Ditrau şehrinden ve organizatör spor kulübü Ditriders Motorsport'tan gelmektedir. Etkinliğin yerel bölgeyle ilişkilendirilmesi amaçlanmıştır. Etkinlik; bir gün prolog ve orman yolları, dik tırmanışlar, kayalık parkurlar vb. içeren iki günlük dağ sürüşü olmak üzere toplam 3 günden oluşmaktadır.",
-    "main_sponsors": "ANA SPONSORLAR"
+    "main_sponsors": "ANA SPONSORLAR",
+    "elevation": "Rakım",
+    "status": "Durum"
   }
 }

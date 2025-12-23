@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import Navbar from "../Components/Navbar";
 import AboutSection from "../Components/AboutSection";
 import { usePathname, useRouter } from 'next/navigation';
+import RaceMap from '../Components/RaceMap';
 
 export default function Home() {
   const t = useTranslations('Home');
@@ -15,10 +16,10 @@ export default function Home() {
 
     // Örn: /tr/about -> segments: ["", "tr", "about"]
     const segments = pathname.split('/');
-    
+
     // Dil kodunu (index 1) yeni seçilen dille değiştiriyoruz
     segments[1] = newLang;
-    
+
     const newPath = segments.join('/');
     router.push(newPath);
   }
@@ -30,7 +31,7 @@ export default function Home() {
         <span>{t('announcement')}</span>
         <a href="#" className="underline font-bold hover:text-black transition">{t('apply')}</a>
       </div>
-      
+
       <header className="relative h-[400px] flex flex-col justify-center items-center text-center overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -38,7 +39,7 @@ export default function Home() {
           autoPlay muted loop playsInline
         />
         <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
-        
+
         <div className="relative z-20 w-full">
           <Navbar onLangChange={handleLangChange} />
         </div>
@@ -56,6 +57,18 @@ export default function Home() {
       </header>
       <main>
         <AboutSection />
+        <section className="py-20 px-4 max-w-7xl mx-auto">
+        <div className="mb-10 text-center">
+          <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
+            {t('race_track_title')} <span className="text-lime-500">{t('race_track_title_span')}</span>
+          </h2>
+          <p className="text-zinc-500 mt-3 text-lg font-medium">
+            {t('race_track_subtitle')}
+          </p>
+        </div>
+        {/* Harita Bileşeni */}
+        <RaceMap />
+      </section>
       </main>
     </div>
   );

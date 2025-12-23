@@ -1,6 +1,13 @@
 {
-  "Navbar": { "home": "Главная", "about": "О нас", "contact": "Контакт" },
+  "Navbar": {
+    "home": "Главная",
+    "about": "О нас",
+    "contact": "Контакт"
+  },
   "Home": {
+    "race_track_title": "Гоночная",
+    "race_track_title_span": "Трасса",
+    "race_track_subtitle": "Изучите предстоящие испытания в режиме 3D-спутника",
     "announcement": "Предварительная регистрация началась!",
     "apply": "Подать заявку",
     "title": "ХАРД ЭНДУРО",
@@ -10,6 +17,8 @@
     "about_title_1": "О",
     "about_title_2": "DITROCKS",
     "about_description": "Название происходит от города Дитрау и организаторского спортивного клуба – Ditriders Motorsport...",
-    "main_sponsors": "ГЛАВНЫЕ СПОНСОРЫ"
+    "main_sponsors": "ГЛАВНЫЕ СПОНСОРЫ",
+    "elevation": "Высота",
+    "status": "Статус"
   }
 }
