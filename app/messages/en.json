@@ -1,0 +1,20 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "Home": {
+    "announcement": "Pre-registrations have started! Don't miss out",
+    "apply": "Apply Now",
+    "title": "HARD ENDURO",
+    "schedule": "Schedule",
+    "register": "Register Now",
+    "about_subtitle": "FIND OUT MORE",
+    "about_title_1": "ABOUT",
+    "about_title_2": "DITROCKS",
+    "about_category": "HARD ENDURO",
+    "about_description": "The name comes from Ditrau city and from the organizing sports club – Ditriders Motorsport. It is meant to help associate the event with the local area. The event consists of 3 days, a day of prologue and two days of riding in the mountains that combine forest roads, steep climbs, rocky tracks, etc.",
+    "main_sponsors": "MAIN SPONSORS"
+  }
+}

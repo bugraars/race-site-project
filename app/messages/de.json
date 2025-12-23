@@ -1,0 +1,15 @@
+{
+  "Navbar": { "home": "Startseite", "about": "Über uns", "contact": "Kontakt" },
+  "Home": {
+    "announcement": "Vorregistrierungen haben begonnen!",
+    "apply": "Jetzt bewerben",
+    "title": "HARD ENDURO",
+    "schedule": "Zeitplan",
+    "register": "Jetzt registrieren",
+    "about_subtitle": "MEHR ERFAHREN",
+    "about_title_1": "ÜBER",
+    "about_title_2": "DITROCKS",
+    "about_description": "Der Name stammt von der Stadt Ditrau und dem organisierenden Sportverein – Ditriders Motorsport...",
+    "main_sponsors": "HAUPTSPONSOREN"
+  }
+}

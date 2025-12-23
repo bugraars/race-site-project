@@ -6,11 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "go": "npm run build && npm start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^7.2.0",
     "next": "16.1.0",
+    "next-intl": "^4.6.1",
+    "prisma": "^7.2.0",
     "react": "19.2.3",
+    "react-country-flag": "^3.1.0",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
