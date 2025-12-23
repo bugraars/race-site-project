@@ -18,11 +18,11 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
     /* fixed, absolute kaldırıldı. Standart block yapısında en üstte durur. */
     <nav className="w-full bg-zinc-950 border-b border-white/5 px-4 md:px-12 py-6">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
+
         {/* SOL: LOGO */}
         <div className="flex items-center">
-          <a 
-            href="#hero" 
+          <a
+            href="#hero"
             onClick={(e) => scrollToSection(e, "hero")}
             className="text-xl md:text-2xl font-black text-lime-400 italic tracking-tighter"
           >
@@ -52,7 +52,7 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
         </div>
 
         {/* SAĞ: Dil Seçici */}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center min-w-[140px] justify-end relative z-[110]">
           <LangListbox onChange={onLangChange} />
         </div>
       </div>

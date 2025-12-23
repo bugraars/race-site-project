@@ -40,7 +40,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none" />
 
-        <div className="relative z-20 w-full">
+        <div className="relative z-[110] w-full">
           <Navbar onLangChange={handleLangChange} />
         </div>
 

@@ -48,7 +48,7 @@ export default function LangListbox({ onChange }: { onChange: (lang: string) => 
             <ChevronUpDownIcon aria-hidden="true" className="ml-auto h-5 w-5 text-gray-400" />
           </ListboxButton>
           
-          <ListboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-900 py-1 text-base shadow-lg border border-white/10">
+          <ListboxOptions className="absolute right-0 mt-2 w-full origin-top-right overflow-hidden rounded-xl bg-zinc-900 shadow-2xl ring-1 ring-white/10 focus:outline-none z-[120]">
             {languages.map((lang) => (
               <ListboxOption
                 key={lang.id}
