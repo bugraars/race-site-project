@@ -19,7 +19,8 @@
     "about_description": "Der Name stammt von der Stadt Ditrau und dem organisierenden Sportverein – Ditriders Motorsport...",
     "main_sponsors": "HAUPTSPONSOREN",
     "elevation": "Höhe",
-    "status": "Status"
-
+    "status": "Status",
+    "difficulty": "Schwierigkeit",
+    "about_category": "Kategorie Details" 
   }
 }
