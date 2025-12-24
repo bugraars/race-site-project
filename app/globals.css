@@ -24,6 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .checkpoint-marker {
   width: 24px;
   height: 24px;
@@ -37,4 +38,10 @@ body {
 
 .checkpoint-marker:hover {
   transform: scale(1.2);
+}
+
+@layer components {
+  .register-input {
+    @apply w-full bg-zinc-950 border border-zinc-800 p-4 rounded-xl focus:border-lime-500 outline-none transition-all placeholder:text-zinc-600 text-sm;
+  }
 }

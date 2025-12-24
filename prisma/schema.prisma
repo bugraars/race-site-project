@@ -1,22 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
+  // previewFeatures = ["driverAdapters"] // Eğer hata alırsan bu satırı ekle
 }
 
 datasource db {
   provider = "postgresql"
+  // url satırı tamamen silindi
 }
+model Racer {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  emailVerified     Boolean  @default(false)
+  verificationCode  String?
+  codeCreatedAt     DateTime?
+  
+  // Kişisel Bilgiler
+  firstName         String?
+  lastName          String?
+  gender            String?
+  birthDate         DateTime?
+  nationality       String?
+  phone             String?
+  idNumber          String?
+  address           String?
+  emergencyPhone1   String?
+  emergencyPhone2   String?
 
-model Race {
-  id          Int      @id @default(autoincrement())
-  name        String
-  date        DateTime
-  description String?
-  createdAt   DateTime @default(now())
+  // Ek Hizmetler & Durum
+  hasLicense        Boolean  @default(false)
+  needsTransfer     Boolean  @default(false)
+  needsBikeRental   Boolean  @default(false)
+  paymentStatus     String   @default("PENDING") // PENDING, SUCCESS, FAILED
+  createdAt         DateTime @default(now())
 }

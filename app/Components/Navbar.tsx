@@ -2,9 +2,18 @@
 
 import { useTranslations } from "next-intl";
 import LangListbox from "./LangListbox";
+import { Link } from "@/i18n/routing";
 
 export default function Navbar({ onLangChange }: { onLangChange: (lang: string) => void }) {
   const t = useTranslations("Navbar");
+  // pathname'den dili almak için
+  let locale = "en";
+  if (typeof window !== "undefined") {
+    const match = window.location.pathname.match(/^\/?([a-zA-Z-]{2,5})\b/);
+    if (match && match[1]) {
+      locale = match[1];
+    }
+  }
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -26,7 +35,7 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
             onClick={(e) => scrollToSection(e, "hero")}
             className="text-xl md:text-2xl font-black text-lime-400 italic tracking-tighter"
           >
-            LOGO
+            OLYMPOS
           </a>
         </div>
 
@@ -34,12 +43,7 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
         <div className="hidden md:block">
           <ul className="flex items-center gap-10 text-white font-bold text-sm uppercase italic tracking-widest">
             <li>
-              <a href="#hero" onClick={(e) => scrollToSection(e, "hero")} className="hover:text-lime-400 transition-colors">
-                {t("home")}
-              </a>
-            </li>
-            <li>
-              <a href="#race-track" onClick={(e) => scrollToSection(e, "race-track")} className="hover:text-lime-400 transition-colors">
+              <a href="#about" onClick={(e) => scrollToSection(e, "about")} className="hover:text-lime-400 transition-colors">
                 {t("about")}
               </a>
             </li>
@@ -48,6 +52,12 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
                 {t("contact")}
               </a>
             </li>
+            {/* <Link
+              href="/register"
+              className="bg-lime-400 text-black px-4 py-2 rounded font-bold"
+            >
+              {t("register")}
+            </Link> */}
           </ul>
         </div>
 
