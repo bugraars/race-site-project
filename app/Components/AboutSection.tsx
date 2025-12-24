@@ -30,7 +30,7 @@ export default function AboutSection() {
       {/* Sağ Taraf: İçerik */}
       <div className="w-full md:w-1/2 space-y-6">
         <div>
-          <h2 className="text-4xl md:text-5xl font-extrabold mt-2 italic tracking-tighter">
+          <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
             <span className="text-zinc-800">{t("about_title_1")} </span>
             <span className="text-lime-500">{t("about_title_2")}</span>
           </h2>

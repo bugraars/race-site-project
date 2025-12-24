@@ -69,7 +69,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
               {t('race_track_title')} <span className="text-lime-500">{t('race_track_title_span')}</span>
             </h2>
-            <p className="text-zinc-500 mt-2 text-lg font-medium">
+            <p className="text-zinc-400 font-bold tracking-widest mt-1">
               {t('race_track_subtitle')}
             </p>
           </div>
