@@ -28,11 +28,11 @@ body {
 .checkpoint-marker {
   width: 24px;
   height: 24px;
-  background-color: #a3e635; /* lime-400 */
+  background-color: #dc2626; /* red-600 */
   border: 4px solid white;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(163, 230, 53, 0.6);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
   transition: transform 0.2s ease;
 }
 
@@ -42,6 +42,6 @@ body {
 
 @layer components {
   .register-input {
-    @apply w-full bg-zinc-950 border border-zinc-800 p-4 rounded-xl focus:border-lime-500 outline-none transition-all placeholder:text-zinc-600 text-sm;
+    @apply w-full bg-zinc-950 border border-zinc-800 p-4 rounded-xl focus:border-red-500 outline-none transition-all placeholder:text-zinc-600 text-sm;
   }
 }

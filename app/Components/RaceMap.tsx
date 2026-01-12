@@ -11,7 +11,7 @@ interface Checkpoint {
   id: number;
   coords: [number, number];
   elevation: string;
-  difficulty: number; // 1, 2 veya 3
+  difficulty: number;
   img: string;
   title: { tr: string; en: string; de: string; ru: string; };
   desc: { tr: string; en: string; de: string; ru: string; };
@@ -79,7 +79,7 @@ const RaceMap = () => {
         id: 'route',
         type: 'line',
         source: 'route',
-        paint: { 'line-color': '#a3e635', 'line-width': 5 }
+        paint: { 'line-color': '#dc2626', 'line-width': 5 }
       });
     }
 
@@ -108,21 +108,19 @@ const RaceMap = () => {
             animate={{ y: 0 }} 
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 20, stiffness: 100 }}
-            className="absolute bottom-0 inset-x-0 bg-[#121212]/95 backdrop-blur-md border-t border-lime-500/20 p-6 md:p-10 z-50 rounded-t-[2.5rem] text-white"
+            className="absolute bottom-0 inset-x-0 bg-[#121212]/95 backdrop-blur-md border-t border-red-500/20 p-6 md:p-10 z-50 rounded-t-[2.5rem] text-white"
           >
             <div className="max-w-6xl mx-auto relative">
               
-              {/* KAPATMA BUTONU: Görselin üstünde kalması için z-index ve konum düzenlendi */}
               <button 
                 onClick={() => setSelectedPoint(null)}
-                className="absolute -top-4 -right-2 md:top-0 md:right-0 bg-lime-500 text-black p-2.5 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 z-[70] border-2 border-[#121212]"
+                className="absolute -top-4 -right-2 md:top-0 md:right-0 bg-red-500 text-white p-2.5 rounded-full shadow-2xl transition-all hover:scale-110 active:scale-95 z-[70] border-2 border-[#121212]"
               >
                 <span className="text-xl w-6 h-6 flex items-center justify-center font-bold">✕</span>
               </button>
 
               <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start relative z-10">
                 
-                {/* SOL: GÖRSEL */}
                 <div className="w-full md:w-1/2 relative z-20">
                   <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-zinc-800 shadow-xl">
                     <img 
@@ -130,32 +128,28 @@ const RaceMap = () => {
                       className="object-cover w-full h-full" 
                       alt={selectedPoint.title[locale]} 
                     />
-                    {/* Görselin üzerine hafif bir degradé (Opsiyonel) */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                   </div>
                 </div>
 
-                {/* SAĞ: İÇERİK */}
                 <div className="w-full md:w-1/2 space-y-6 relative z-20">
-                  <h3 className="text-3xl md:text-4xl font-black text-lime-400 italic uppercase tracking-tighter leading-none">
+                  <h3 className="text-3xl md:text-4xl font-black text-red-500 italic uppercase tracking-tighter leading-none">
                     {selectedPoint.title[locale]}
                   </h3>
 
                   <div className="flex gap-4">
-                    {/* RAKIM */}
                     <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl min-w-[110px]">
                       <span className="text-[10px] text-zinc-500 block uppercase font-bold mb-1 tracking-widest italic">{t('elevation')}</span>
-                      <span className="text-lime-400 font-mono text-lg font-bold">{selectedPoint.elevation}</span>
+                      <span className="text-red-500 font-mono text-lg font-bold">{selectedPoint.elevation}</span>
                     </div>
                     
-                    {/* ZORLUK (YILDIZLAR) */}
                     <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl min-w-[110px]">
                       <span className="text-[10px] text-zinc-500 block uppercase font-bold mb-1 tracking-widest italic">{t('difficulty')}</span>
                       <div className="flex gap-1">
                         {[1, 2, 3].map((star) => (
                           <span 
                             key={star} 
-                            className={`text-lg ${star <= selectedPoint.difficulty ? 'text-lime-400' : 'text-zinc-700'}`}
+                            className={`text-lg ${star <= selectedPoint.difficulty ? 'text-red-500' : 'text-zinc-700'}`}
                           >
                             ★
                           </span>

@@ -30,7 +30,8 @@
     "days": "GÜN",
     "hours": "SAAT",
     "minutes": "DAKİKA",
-    "seconds": "SANİYE"
+    "seconds": "SANİYE",
+    "february": "Şubat"
   },
   "Register": {
     "stepTitle1": "Doğrulama",

@@ -7,9 +7,8 @@ import AboutSection from "../Components/AboutSection";
 import { usePathname, useRouter } from 'next/navigation';
 import RaceMap from '../Components/RaceMap';
 import Footer from '../Components/Footer';
-import HeroSection from '../Components/HeroContent';
-import CountdownTimer from '../Components/CountdownTimer';
 import HeroContent from '../Components/HeroContent';
+import CountdownTimer from '../Components/CountdownTimer';
 
 
 export default function Home() {
@@ -17,16 +16,10 @@ export default function Home() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Dil seçimi değiştiğinde URL'i güncelleyen fonksiyon
   function handleLangChange(newLang: string) {
     if (!pathname) return;
-
-    // Örn: /tr/about -> segments: ["", "tr", "about"]
     const segments = pathname.split('/');
-
-    // Dil kodunu (index 1) yeni seçilen dille değiştiriyoruz
     segments[1] = newLang;
-
     const newPath = segments.join('/');
     router.push(newPath);
   }
@@ -67,7 +60,7 @@ export default function Home() {
         <section className="pb-10 px-4 max-w-7xl mx-auto">
           <div className="mb-4 text-center">
             <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
-              {t('race_track_title')} <span className="text-lime-500">{t('race_track_title_span')}</span>
+              {t('race_track_title')} <span className="text-red-500">{t('race_track_title_span')}</span>
             </h2>
             <p className="text-zinc-400 font-bold tracking-widest mt-1">
               {t('race_track_subtitle')}

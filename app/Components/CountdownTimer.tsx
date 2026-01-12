@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 export default function CountdownTimer() {
     const t = useTranslations('Home');
-    const targetDate = new Date('2026-07-17T09:00:00+03:00');
+    const targetDate = new Date('2026-02-14T10:00:00+03:00');
 
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
@@ -29,7 +29,7 @@ export default function CountdownTimer() {
             {/* UTC Badge - Sadece saniyenin üzerinde */}
             {isSeconds && (
                 <div className="absolute -top-7 right-0 z-30">
-                    <span className="bg-lime-400 text-black text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-sm whitespace-nowrap shadow-lg">
+                    <span className="bg-red-500 text-white text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-sm whitespace-nowrap shadow-lg">
                         UTC +3
                     </span>
                 </div>
@@ -45,7 +45,7 @@ export default function CountdownTimer() {
                 <div className="absolute w-full h-[1px] bg-black/50 top-1/2 left-0 z-20"></div>
                 
                 {/* Font Boyutları: Mobil (XS) için küçültüldü */}
-                <span className="text-xl sm:text-3xl md:text-5xl font-black text-lime-400 leading-none">
+                <span className="text-xl sm:text-3xl md:text-5xl font-black text-red-500 leading-none">
                     {value.toString().padStart(2, '0')}
                 </span>
             </div>

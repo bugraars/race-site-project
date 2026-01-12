@@ -30,7 +30,8 @@
     "days": "ДНЕЙ",
     "hours": "ЧАСОВ",
     "minutes": "МИНУТ",
-    "seconds": "СЕКУНД"
+    "seconds": "СЕКУНД",
+    "february": "Февраль"
   },
   "Register": {
     "stepTitle1": "Проверка",

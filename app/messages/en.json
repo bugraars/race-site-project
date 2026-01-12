@@ -30,7 +30,8 @@
     "days": "DAYS",
     "hours": "HOURS",
     "minutes": "MINUTES",
-    "seconds": "SECONDS"
+    "seconds": "SECONDS",
+    "february": "February"
   },
   "Register": {
     "stepTitle1": "Verification",

@@ -8,17 +8,17 @@ export default function HeroContent() {
     return (
         <div className="w-full md:flex-1 flex flex-col items-center md:items-start text-center md:text-left my-4 ">
             <h1 className="text-6xl font-black text-white leading-[0.85] tracking-tighter uppercase italic">
-                OLYMPOS <span className="text-lime-400">2026</span>
+                OLYMPOS <span className="text-red-500">2026</span>
             </h1>
 
             <div className="mt-6 flex flex-col md:flex-row items-center md:items-start gap-1 md:gap-3 text-xl md:text-3xl font-bold uppercase tracking-tight">
-                <span className="text-white">Hard Enduro 17-18 {t('july')}</span>
+                <span className="text-white">Hard Enduro 14-15 {t('february')}</span>
             </div>
 
             <div className="mt-6 w-full md:w-auto flex justify-center md:justify-start">
                 <Link
                     href="/register"
-                    className="flex items-center justify-center gap-2 w-fit px-8 py-3 md:px-10 md:py-4 bg-lime-500 hover:bg-white text-black font-bold uppercase tracking-tighter rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-lime-500/40 text-base md:text-lg text-center group"
+                    className="flex items-center justify-center gap-2 w-fit px-8 py-3 md:px-10 md:py-4 bg-red-500 hover:bg-white text-white hover:text-black font-bold uppercase tracking-tighter rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-red-500/40 text-base md:text-lg text-center group"
                 >
                     <span>{t("register_now")}</span>
                     <svg

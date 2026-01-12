@@ -5,12 +5,11 @@ import { useTranslations } from "next-intl";
 export default function AboutSection() {
   const t = useTranslations("Home");
 
-  // Sponsor listesi (İleride burayı kolayca güncelleyebilirsin)
   const sponsors = [
-    { id: 1, src: "/img/redbull.svg", alt: "Red Bull" },
-    { id: 2, src: "/img/redbull.svg", alt: "Sponsor 2" },
-    { id: 3, src: "/img/redbull.svg", alt: "Sponsor 3" },
-    { id: 4, src: "/img/redbull.svg", alt: "Sponsor 4" },
+    { id: 1, src: "/img/Cazador.png", alt: "Cazador", height: 64 },
+    { id: 2, src: "/img/Genclik-spor.png", alt: "Gençlik ve Spor", height: 64 },
+    { id: 3, src: "/img/Kemer-Kaym.png", alt: "Kemer Kaymakamlığı", height: 64 },
+    { id: 4, src: "/img/Kemer-Beld.png", alt: "Kemer Belediyesi", height: 72 }
   ];
 
   return (
@@ -32,7 +31,7 @@ export default function AboutSection() {
         <div>
           <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
             <span className="text-zinc-800">{t("about_title_1")} </span>
-            <span className="text-lime-500">{t("about_title_2")}</span>
+            <span className="text-red-500">{t("about_title_2")}</span>
           </h2>
           <p className="text-zinc-400 font-bold tracking-widest mt-1">
             {t("about_category")}
@@ -59,14 +58,14 @@ export default function AboutSection() {
                   // Her logoya 2sn aralıkla yanması için delay ekliyoruz
                   animationDelay: `${index * 2}s`,
                   // Toplam süre = logo sayısı * 2sn (8 saniye)
-                  animationDuration: '8s' 
+                  animationDuration: '8s',
+                  height: sponsor.height,
                 }}
               >
-                <Image 
+                <img 
                   src={sponsor.src} 
                   alt={sponsor.alt} 
-                  width={60} // Boyut yarıya indirildi
-                  height={30}
+                  style={{ height: sponsor.height, width: 'auto' }}
                   className="object-contain"
                 />
               </div>
