@@ -8,11 +8,11 @@ export default function Footer() {
     const mailtoLink = `mailto:${email}?subject=${subject}`;
 
     return (
-        <footer id="contact" className="w-full bg-zinc-950 border-t border-white/5 py-8 mt-10">
-            <div className="max-w-7xl mx-auto px-4 flex flex-col gap-6 text-zinc-400 text-xs">
+        <footer id="contact" className="w-full bg-gray-100 border-t border-gray-300 py-8 mt-10">
+            <div className="max-w-7xl mx-auto px-4 flex flex-col gap-6 text-gray-700 text-xs">
 
                 {/* Üst Satır: İletişim ve Sosyal Medya */}
-                <div className="flex flex-wrap items-center justify-center md:justify-between gap-4 border-b border-white/5 pb-4">
+                <div className="flex flex-wrap items-center justify-center md:justify-between gap-4 border-b border-gray-300 pb-4">
                     <div className="flex items-center gap-6">
                         <a
                             href={mailtoLink}
@@ -26,11 +26,9 @@ export default function Footer() {
 
                         <div className="flex items-center gap-4">
                             <a href="https://instagram.com/hardenduro_olympos" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-red-500 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
                                 <span>Instagram</span>
                             </a>
                             <a href="https://youtube.com/@olymposhardenduro" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-red-500 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21.8 8.001a2.752 2.752 0 0 0-1.936-1.946C18.077 6 12 6 12 6s-6.077 0-7.864.055A2.752 2.752 0 0 0 2.2 8.001C2.145 9.789 2.145 12 2.145 12s0 2.211.055 3.999a2.752 2.752 0 0 0 1.936 1.946C5.923 18 12 18 12 18s6.077 0 7.864-.055a2.752 2.752 0 0 0 1.936-1.946c.055-1.788.055-3.999.055-3.999s0-2.211-.055-3.999zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
                                 <span>YouTube</span>
                             </a>
                         </div>
