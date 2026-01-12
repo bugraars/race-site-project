@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useTranslations, useLocale } from 'next-intl';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYnVncmFhcnMiLCJhIjoiY21qaWRpaDRzMWhwdjNocXhkOHVjN3YwayJ9.1uR9bKzPv-8zPhyzidNGkQ';
+mapboxgl.accessToken = process.env.NEXT_MAPBOX_TOKEN || 'pk.eyJ1IjoiYnVncmFhcnMiLCJhIjoiY21qaWRpaDRzMWhwdjNocXhkOHVjN3YwayJ9.1uR9bKzPv-8zPhyzidNGkQ';
+
 
 interface Checkpoint {
   id: number;

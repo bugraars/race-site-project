@@ -53,12 +53,8 @@ export default function AboutSection() {
             {sponsors.map((sponsor, index) => (
               <div 
                 key={sponsor.id} 
-                className="relative grayscale opacity-40 animate-sponsor-glow"
+                className="relative"
                 style={{ 
-                  // Her logoya 2sn aralıkla yanması için delay ekliyoruz
-                  animationDelay: `${index * 2}s`,
-                  // Toplam süre = logo sayısı * 2sn (8 saniye)
-                  animationDuration: '8s',
                   height: sponsor.height,
                 }}
               >
@@ -74,25 +70,7 @@ export default function AboutSection() {
         </div>
       </div>
 
-      <style jsx global>{`
-        @keyframes sponsor-glow {
-          0%, 25% { 
-            filter: grayscale(0%); 
-            opacity: 1; 
-            transform: scale(1.05);
-          }
-          30%, 100% { 
-            filter: grayscale(100%); 
-            opacity: 0.4; 
-            transform: scale(1);
-          }
-        }
-        .animate-sponsor-glow {
-          animation-name: sponsor-glow;
-          animation-iteration-count: infinite;
-          transition: all 0.5s ease;
-        }
-      `}</style>
+      <style jsx global>{``}</style>
     </section>
   );
 }
