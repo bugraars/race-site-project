@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import LangListbox from "./LangListbox";
-import { Link } from "@/i18n/routing";
 
 export default function Navbar({ onLangChange }: { onLangChange: (lang: string) => void }) {
   const t = useTranslations("Navbar");
@@ -59,6 +58,16 @@ export default function Navbar({ onLangChange }: { onLangChange: (lang: string) 
             <li>
               <a href="#about" onClick={(e) => scrollToSection(e, "about")} className="hover:text-red-500 transition-colors">
                 {t("about")}
+              </a>
+            </li>
+            <li>
+              <a href="#sponsors" onClick={(e) => scrollToSection(e, "sponsors")} className="hover:text-red-500 transition-colors">
+                {t("sponsors")}
+              </a>
+            </li>
+            <li>
+              <a href="#raceMap" onClick={(e) => scrollToSection(e, "raceMap")} className="hover:text-red-500 transition-colors">
+                {t("raceMap")}
               </a>
             </li>
             <li>

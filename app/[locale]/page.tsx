@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import AnnouncementBar from '../Components/AnnouncementBar';
 import Navbar from "../Components/Navbar";
 import AboutSection from "../Components/AboutSection";
+import SponsorsSection from "../Components/SponsorsSection";
 import { usePathname, useRouter } from 'next/navigation';
 import RaceMap from '../Components/RaceMap';
 import Footer from '../Components/Footer';
@@ -56,8 +57,11 @@ export default function Home() {
         <div id='about' className="mt-[-30px]">
           <AboutSection />
         </div>
+        <div id='sponsors' className="mt-[-30px]">
+          <SponsorsSection />
+        </div>
         {/* Harita Kısmı */}
-        <section className="pb-10 px-4 max-w-7xl mx-auto">
+        <section className="py-20 px-4 max-w-7xl mx-auto">
           <div className="mb-4 text-center">
             <h2 className="text-4xl md:text-5xl font-black text-zinc-800 italic uppercase tracking-tighter">
               {t('race_track_title')} <span className="text-red-500">{t('race_track_title_span')}</span>

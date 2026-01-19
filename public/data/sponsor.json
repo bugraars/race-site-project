@@ -1,0 +1,36 @@
+{
+  "sponsors": [
+    {
+      "id": 1,
+      "name": "Kemer Belediyesi",
+      "logo": "/img/sponsors/Kemer-Beld.png",
+      "height": 72,
+      "url": "https://www.kemer.bel.tr",
+      "description": "Kemer Belediyesi"
+    },
+    {
+      "id": 2,
+      "name": "Cazador",
+      "logo": "/img/sponsors/Cazador.png",
+      "height": 72,
+      "url": "https://www.cazador.com.tr",
+      "description": "Cazador Erkek Giyim"
+    },
+    {
+      "id": 3,
+      "name": "Gençlik ve Spor",
+      "logo": "/img/sponsors/Genclik-spor.png",
+      "height": 72,
+      "url": "https://www.gsgm.gov.tr",
+      "description": "Gençlik ve Spor Bakanlığı"
+    },
+    {
+      "id": 4,
+      "name": "Kemer Kaymakamlığı",
+      "logo": "/img/sponsors/Kemer-Kaym.png",
+      "height": 72,
+      "url": "https://kemer.gov.tr",
+      "description": "Kemer Kaymakamlığı"
+    }
+  ]
+}

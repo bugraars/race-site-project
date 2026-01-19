@@ -2,6 +2,9 @@
   "Navbar": {
     "home": "Anasayfa",
     "about": "Hakkımızda",
+    "sponsors": "Sponsorlar",
+    "etaps": "Etaplar",
+    "raceMap": "Yarış Haritası",
     "contact": "İletişim",
     "register": "Kayıt Ol"
   },
@@ -19,8 +22,9 @@
     "about_title_1": "HAKKINDA",
     "about_title_2": "OLYMPOS ",
     "about_category": "HARD ENDURO",
-    "about_description": "Antalya’nın kalbi Kemer’de, Akdeniz’in turkuaz sularından antik tanrıların evi Tahtalı Dağı’nın bulutlu zirvelerine uzanan, tarihin en sert ve doğanın en vahşi yüzüyle tanışacağınız efsanevi bir serüven başlıyor; bu sadece bir motosiklet yarışı değil, deniz seviyesinden 2365 metreye 2 gün boyunca sürecek soluksuz bir irade sınavı, sınırları zorlayan bir meydan okuma: Olympos Hard Enduro sizi bekliyor!",
+    "about_description": "14–15 Şubat tarihlerinde Antalya Kemer’in eşsiz doğası, enduro tutkunlarını sınırlarını zorlamaya davet ediyor. Her seviyeden sürücüye hitap eden parkurlar, hem amatör ruhu yaşamak isteyenlere hem de kıyasıya mücadele arayan tecrübeli sporculara unutulmaz bir deneyim sunuyor. Daha önce lastik izi değmemiş bakir patikalarda; zorlu tırmanışlar, teknik geçişler ve doğayla iç içe etaplar sürücüleri bekliyor. Olympos Hard Enduro’da amaç sadece finişe ulaşmak değil; mücadeleyi hissetmek, doğayla bütünleşmek ve enduronun gerçek ruhunu yaşamaktır. Bu organizasyondan ayrılırken yaşanan rekabet ve paylaşılan anlar, sporcuların hafızalarında derin izler bırakacak; parkurun ruhu, Kemer’den hüzünlü ama gururlu bir ayrılışın nedeni olacaktır.",
     "main_sponsors": "ANA SPONSORLAR",
+    "supporters": "DESTEKÇİLERİMİZ",
     "elevation": "Rakım",
     "status": "Durum",
     "announcement_short": "Ön Kayıtlar Açık!",

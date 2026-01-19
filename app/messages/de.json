@@ -2,6 +2,9 @@
   "Navbar": {
     "home": "Startseite",
     "about": "Über uns",
+    "sponsors": "Sponsoren",
+    "etaps": "Etappen",
+    "raceMap": "Rennkarte",
     "contact": "Kontakt",
     "register": "Registrieren"
   },
@@ -19,8 +22,9 @@
     "about_title_1": "ÜBER",
     "about_title_2": "OLYMPOS ",
     "about_category": "HARD ENDURO",
-    "about_description": "Im Herzen von Antalya, in Kemer, beginnt ein legendäres Abenteuer, das sich von den türkisfarbenen Wassern des Mittelmeers bis zu den wolkenverhangenen Gipfeln des Tahtalı-Berges, der Heimat der antiken Götter, erstreckt. Hier begegnen Sie der härtesten Seite der Geschichte und der wildesten Seite der Natur. Dies ist nicht nur ein Motorradrennen, sondern eine atemlose Prüfung des Willens, die sich über 2 Tage von Meereshöhe bis auf 2365 Meter erstreckt – eine Herausforderung, die alle Grenzen sprengt: Das Olympos Hard Enduro erwartet Sie!",
+    "about_description": "Am 14. und 15. Februar lädt die einzigartige Natur von Antalya Kemer Enduro-Begeisterte dazu ein, ihre Grenzen zu testen. Die Strecken sind für Fahrer aller Niveaus konzipiert und bieten sowohl Amateuren als auch erfahrenen Profis ein unvergessliches Rennerlebnis. Auf unberührten Pfaden warten anspruchsvolle Anstiege, technische Passagen und Etappen inmitten der Wildnis auf die Teilnehmer. Bei Olympos Hard Enduro geht es nicht nur darum, das Ziel zu erreichen, sondern darum, den Kampf zu spüren und den wahren Geist des Enduro zu erleben. Die sportliche Herausforderung und die gemeinsamen Momente werden den Fahrern noch lange in Erinnerung bleiben und für einen wehmütigen, aber stolzen Abschied von Kemer sorgen.",
     "main_sponsors": "HAUPTSPONSOREN",
+    "supporters": "UNSERE UNTERSTÜTZER",
     "elevation": "Höhe",
     "status": "Status",
     "announcement_short": "Voranmeldung Aktiv!",
