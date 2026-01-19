@@ -3,7 +3,7 @@
  * Portfolio (Next.js) → Core/Server (Node.js) bağlantısı
  */
 
-const API_BASE_URL = process.env.NEXT_API_URL || 'http://localhost:3000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 interface ApiResponse<T = unknown> {
   success: boolean;
