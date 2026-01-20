@@ -85,18 +85,28 @@ export interface RacerRegistrationData {
   birthDate?: string;
   nationality?: string;
   bloodType?: string;
-  needsTransfer?: boolean;
-  needsBikeRental?: boolean;
+  tshirtSize?: string;
+  bibNumber?: string;
+  paymentMethod?: "BANK_TRANSFER" | "CREDIT_CARD";
+  agreedToTerms?: boolean;
+  agreedToPrivacy?: boolean;
 }
 
 /**
  * Yeni yarışçı kaydı
  */
 export async function registerRacer(data: RacerRegistrationData) {
-  return fetchApi<{ id: number; message: string }>('/racers/register', {
+  return fetchApi<{ id: number; bibNumber?: string; message: string }>('/racers/register', {
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+/**
+ * Müsait bib numaralarını getir (1-200 arası alınmamış olanlar)
+ */
+export async function fetchAvailableBibNumbers() {
+  return fetchApi<number[]>('/racers/available-bib-numbers');
 }
 
 // ==================== SOUVENIR ====================
