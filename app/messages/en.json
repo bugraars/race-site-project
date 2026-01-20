@@ -71,6 +71,8 @@
     "participants_title": "Participants",
     "participants_title_span": "2026",
     "participants_subtitle": "Registered racers",
-    "participants_count": "Registered Racers"
+    "participants_count": "Racers",
+    "table_name": "Name",
+    "table_surname": "Surname"
   }
 }

@@ -71,6 +71,8 @@
     "participants_title": "Katılımcılar",
     "participants_title_span": "2026",
     "participants_subtitle": "Yarışa kayıtlı sporcular",
-    "participants_count": "Kayıtlı Yarışçı"
+    "participants_count": "Yarışçı",
+    "table_name": "İsim",
+    "table_surname": "Soyisim"
   }
 }

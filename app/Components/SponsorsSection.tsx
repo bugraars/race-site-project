@@ -30,22 +30,22 @@ export default function SponsorsSection() {
           <span className="text-zinc-800">{t("supporters")}</span>
         </h2>
 
-        <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
           {sponsors.map((sponsor) => (
             <a
               key={sponsor.id}
               href={sponsor.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-110"
+              className="flex flex-col items-center justify-center gap-3 p-4 transition-transform duration-300 hover:scale-110"
             >
               <img
                 src={sponsor.logo}
                 alt={sponsor.name}
                 style={{ height: sponsor.height, width: "auto" }}
-                className="object-contain"
+                className="object-contain max-w-full"
               />
-              <span className="text-zinc-500 text-sm font-medium">
+              <span className="text-zinc-500 text-xs md:text-sm font-medium text-center">
                 {sponsor.description}
               </span>
             </a>

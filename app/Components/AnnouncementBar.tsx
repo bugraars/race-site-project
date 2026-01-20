@@ -21,7 +21,7 @@ export default function AnnouncementBar() {
         <div className="flex items-center gap-2 text-white text-sm md:text-base font-semibold tracking-tight group-hover:underline underline-offset-4 decoration-white/30">
           <span>{t('announcement_short')}</span>
           <span className="hidden sm:inline opacity-30">|</span>
-          <span className="bg-white/20 px-2 py-0.5 rounded-full text-[10px] md:text-xs uppercase tracking-wider">
+          <span className="hidden sm:inline bg-white/20 px-2 py-0.5 rounded-full text-[10px] md:text-xs uppercase tracking-wider">
             {t('apply_now')}
           </span>
         </div>
@@ -29,7 +29,7 @@ export default function AnnouncementBar() {
         {/* Hareketli Ok İkonu */}
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
-          className="h-4 w-4 text-white transition-transform duration-300 group-hover:translate-x-1" 
+          className="hidden sm:block h-4 w-4 text-white transition-transform duration-300 group-hover:translate-x-1" 
           fill="none" 
           viewBox="0 0 24 24" 
           stroke="currentColor"

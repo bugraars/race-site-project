@@ -71,6 +71,8 @@
     "participants_title": "Участники",
     "participants_title_span": "2026",
     "participants_subtitle": "Зарегистрированные гонщики",
-    "participants_count": "Зарегистрированных гонщиков"
+    "participants_count": "Гонщиков",
+    "table_name": "Имя",
+    "table_surname": "Фамилия"
   }
 }
