@@ -66,5 +66,11 @@
   "AnnouncementBar": {
     "announcement_short": "Предварительная регистрация началась!",
     "apply_now": "Подать заявку"
+  },
+  "Participants": {
+    "participants_title": "Участники",
+    "participants_title_span": "2026",
+    "participants_subtitle": "Зарегистрированные гонщики",
+    "participants_count": "Зарегистрированных гонщиков"
   }
 }

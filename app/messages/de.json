@@ -66,5 +66,11 @@
   "AnnouncementBar": {
     "announcement_short": "Vorregistrierung hat begonnen!",
     "apply_now": "Jetzt bewerben"
+  },
+  "Participants": {
+    "participants_title": "Teilnehmer",
+    "participants_title_span": "2026",
+    "participants_subtitle": "Registrierte Fahrer",
+    "participants_count": "Registrierte Fahrer"
   }
 }

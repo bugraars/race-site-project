@@ -66,5 +66,11 @@
   "AnnouncementBar": {
     "announcement_short": "Pre-registration has started!",
     "apply_now": "Apply Now"
+  },
+  "Participants": {
+    "participants_title": "Participants",
+    "participants_title_span": "2026",
+    "participants_subtitle": "Registered racers",
+    "participants_count": "Registered Racers"
   }
 }

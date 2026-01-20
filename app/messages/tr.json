@@ -66,5 +66,11 @@
   "AnnouncementBar": {
     "announcement_short": "Ön kayıtlar başladı!",
     "apply_now": "Hemen Başvur"
+  },
+  "Participants": {
+    "participants_title": "Katılımcılar",
+    "participants_title_span": "2026",
+    "participants_subtitle": "Yarışa kayıtlı sporcular",
+    "participants_count": "Kayıtlı Yarışçı"
   }
 }

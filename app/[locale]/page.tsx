@@ -5,6 +5,7 @@ import AnnouncementBar from '../Components/AnnouncementBar';
 import Navbar from "../Components/Navbar";
 import AboutSection from "../Components/AboutSection";
 import SponsorsSection from "../Components/SponsorsSection";
+import ParticipantsSection from "../Components/ParticipantsSection";
 import { usePathname, useRouter } from 'next/navigation';
 import RaceMap from '../Components/RaceMap';
 import Footer from '../Components/Footer';
@@ -18,11 +19,9 @@ export default function Home() {
   const router = useRouter();
 
   function handleLangChange(newLang: string) {
-    if (!pathname) return;
     const segments = pathname.split('/');
     segments[1] = newLang;
-    const newPath = segments.join('/');
-    router.push(newPath);
+    router.push(segments.join('/'));
   }
 
   return (
@@ -53,13 +52,21 @@ export default function Home() {
         </div>
       </header>
       <main>
-        {/* Hakkında kısmı ve bileşeni */}
+        {/* Hakkında kısmı */}
         <div id='about' className="mt-[-30px]">
           <AboutSection />
         </div>
+
+        {/* Katılımcılar - Hakkında'nın altında */}
+        <div id='participants'>
+          <ParticipantsSection />
+        </div>
+
+        {/* Sponsorlar */}
         <div id='sponsors' className="mt-[-30px]">
           <SponsorsSection />
         </div>
+
         {/* Harita Kısmı */}
         <section className="py-20 px-4 max-w-7xl mx-auto">
           <div className="mb-4 text-center">

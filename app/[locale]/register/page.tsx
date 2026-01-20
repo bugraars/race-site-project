@@ -112,14 +112,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-8 pt-32">
-      <div className="max-w-xl mx-auto bg-zinc-900 border border-zinc-800 p-8 rounded-[2rem]">
+    <div className="min-h-screen bg-black text-white p-4 sm:p-8 pt-24 sm:pt-32">
+      <div className="max-w-xl mx-auto bg-zinc-900 border border-zinc-800 p-4 sm:p-8 rounded-2xl sm:rounded-[2rem]">
         {error && <div className="p-4 mb-4 bg-red-500/10 border border-red-500 rounded-xl text-red-500 text-sm">{error}</div>}
 
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div key="s1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <h2 className="text-3xl font-black italic uppercase text-red-500">Adım 1: Mail</h2>
+              <h2 className="text-2xl sm:text-3xl font-black italic uppercase text-red-500">Adım 1: Mail</h2>
               <input 
                 className="w-full bg-black border border-zinc-800 h-14 px-4 rounded-xl outline-none focus:border-red-500"
                 placeholder="E-posta" value={formData.email}
@@ -133,7 +133,7 @@ export default function RegisterPage() {
 
           {step === 2 && (
             <motion.div key="s2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <h2 className="text-3xl font-black italic uppercase text-red-500">Adım 2: Onay</h2>
+              <h2 className="text-2xl sm:text-3xl font-black italic uppercase text-red-500">Adım 2: Onay</h2>
               <input 
                 className="w-full bg-black border border-zinc-800 h-14 px-4 rounded-xl text-center text-2xl font-mono tracking-widest outline-none focus:border-red-500"
                 placeholder="000000" maxLength={6}
@@ -148,10 +148,10 @@ export default function RegisterPage() {
 
           {step === 3 && (
             <motion.div key="s3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-              <h2 className="text-3xl font-black italic uppercase text-red-500">Adım 3: Kimlik</h2>
+              <h2 className="text-2xl sm:text-3xl font-black italic uppercase text-red-500">Adım 3: Kimlik</h2>
               
-              {/* Ad Soyad */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Ad Soyad - Mobilde alt alta */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input 
                   placeholder="Ad" 
                   value={formData.firstName}
@@ -166,28 +166,28 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {/* TC / Pasaport & Kan Grubu */}
-              <div className="grid grid-cols-3 gap-4">
+              {/* TC / Pasaport & Kan Grubu - Mobilde alt alta */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <input 
                   placeholder="T.C. / Pasaport No" 
                   value={formData.idNumber}
-                  className="col-span-2 bg-black h-14 px-4 rounded-xl border border-zinc-800 focus:border-red-500 outline-none" 
+                  className="sm:col-span-2 bg-black h-14 px-4 rounded-xl border border-zinc-800 focus:border-red-500 outline-none" 
                   onChange={(e) => setFormData({...formData, idNumber: e.target.value})} 
                 />
                 <select
                   value={formData.bloodType}
                   onChange={(e) => setFormData({...formData, bloodType: e.target.value})}
-                  className="bg-black h-14 px-3 rounded-xl border border-zinc-800 focus:border-red-500 outline-none text-center"
+                  className="bg-black h-14 px-4 pr-10 rounded-xl border border-zinc-800 focus:border-red-500 outline-none text-left appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23888%22%20d%3D%22M6%208L1%203h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_1rem_center]"
                 >
-                  <option value="">Kan</option>
+                  <option value="">Kan Grubu</option>
                   {bloodTypes.map((bt) => (
                     <option key={bt} value={bt}>{bt}</option>
                   ))}
                 </select>
               </div>
 
-              {/* Doğum Tarihi & Uyruk */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Doğum Tarihi & Uyruk - Mobilde alt alta */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-zinc-500 text-xs mb-1 block">Doğum Tarihi</label>
                   <input 
@@ -202,7 +202,7 @@ export default function RegisterPage() {
                   <select
                     value={formData.nationality}
                     onChange={(e) => setFormData({...formData, nationality: e.target.value})}
-                    className="w-full bg-black h-14 px-4 rounded-xl border border-zinc-800 focus:border-red-500 outline-none"
+                    className="w-full bg-black h-14 px-4 pr-10 rounded-xl border border-zinc-800 focus:border-red-500 outline-none appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23888%22%20d%3D%22M6%208L1%203h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_1rem_center]"
                   >
                     {countryCodes.map((c) => (
                       <option key={c.code} value={c.code}>{c.name}</option>
@@ -214,8 +214,8 @@ export default function RegisterPage() {
               {/* Telefon */}
               <div>
                 <label className="text-zinc-500 text-xs mb-1 block">Telefon / Phone</label>
-                <div className="flex gap-2">
-                  <div className="flex items-center bg-black h-14 px-3 rounded-xl border border-zinc-800 gap-2">
+                <div className="flex gap-0">
+                  <div className="flex items-center bg-black h-14 px-3 rounded-l-xl border border-r-0 border-zinc-800 gap-2 shrink-0">
                     <ReactCountryFlag countryCode={formData.phoneCountry} svg style={{ width: '1.2em', height: '1.2em' }} />
                     <select
                       value={formData.phoneCountry}
@@ -232,7 +232,7 @@ export default function RegisterPage() {
                     placeholder="5XX XXX XX XX"
                     value={formData.phoneNumber}
                     onChange={(e) => setFormData({...formData, phoneNumber: e.target.value.replace(/\D/g, '')})}
-                    className="flex-1 bg-black h-14 px-4 rounded-xl border border-zinc-800 focus:border-red-500 outline-none"
+                    className="flex-1 min-w-0 bg-black h-14 px-4 rounded-r-xl border border-zinc-800 focus:border-red-500 outline-none"
                   />
                 </div>
               </div>
@@ -240,8 +240,8 @@ export default function RegisterPage() {
               {/* Acil Telefon */}
               <div>
                 <label className="text-zinc-500 text-xs mb-1 block">Acil Durum Telefonu / Emergency Phone</label>
-                <div className="flex gap-2">
-                  <div className="flex items-center bg-black h-14 px-3 rounded-xl border border-zinc-800 gap-2">
+                <div className="flex gap-0">
+                  <div className="flex items-center bg-black h-14 px-3 rounded-l-xl border border-r-0 border-zinc-800 gap-2 shrink-0">
                     <ReactCountryFlag countryCode={formData.emergencyPhoneCountry} svg style={{ width: '1.2em', height: '1.2em' }} />
                     <select
                       value={formData.emergencyPhoneCountry}
@@ -258,7 +258,7 @@ export default function RegisterPage() {
                     placeholder="5XX XXX XX XX"
                     value={formData.emergencyPhoneNumber}
                     onChange={(e) => setFormData({...formData, emergencyPhoneNumber: e.target.value.replace(/\D/g, '')})}
-                    className="flex-1 bg-black h-14 px-4 rounded-xl border border-zinc-800 focus:border-red-500 outline-none"
+                    className="flex-1 min-w-0 bg-black h-14 px-4 rounded-r-xl border border-zinc-800 focus:border-red-500 outline-none"
                   />
                 </div>
               </div>
@@ -275,14 +275,14 @@ export default function RegisterPage() {
 
           {step === 4 && (
             <motion.div key="s4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <h2 className="text-3xl font-black italic uppercase text-red-500">Adım 4: Hizmetler</h2>
+              <h2 className="text-2xl sm:text-3xl font-black italic uppercase text-red-500">Adım 4: Hizmetler</h2>
               <div className="space-y-2">
                 <label className="flex items-center justify-between h-14 px-4 bg-black rounded-xl border border-zinc-800 cursor-pointer">
-                  <span>Havalimanı Transfer (€50)</span>
+                  <span className="text-sm sm:text-base">Havalimanı Transfer (€50)</span>
                   <input type="checkbox" checked={formData.needsTransfer} onChange={(e) => setFormData({...formData, needsTransfer: e.target.checked})} className="accent-red-500 w-5 h-5" />
                 </label>
                 <label className="flex items-center justify-between h-14 px-4 bg-black rounded-xl border border-zinc-800 cursor-pointer">
-                  <span>Motosiklet Kiralama (€250)</span>
+                  <span className="text-sm sm:text-base">Motosiklet Kiralama (€250)</span>
                   <input type="checkbox" checked={formData.needsBikeRental} onChange={(e) => setFormData({...formData, needsBikeRental: e.target.checked})} className="accent-red-500 w-5 h-5" />
                 </label>
               </div>
@@ -300,12 +300,12 @@ export default function RegisterPage() {
             <motion.div key="s5" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
               <div className="text-center">
                 <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto text-white text-3xl mb-4">✓</div>
-                <h2 className="text-3xl font-black italic uppercase">KAYIT TAMAM!</h2>
-                <p className="text-zinc-500 mt-2">Kaydınız alınmıştır. Ödeme sonrası yarışçı numaranız e-posta adresinize gönderilecektir.</p>
+                <h2 className="text-2xl sm:text-3xl font-black italic uppercase">KAYIT TAMAM!</h2>
+                <p className="text-zinc-500 mt-2 text-sm sm:text-base">Kaydınız alınmıştır. Ödeme sonrası yarışçı numaranız e-posta adresinize gönderilecektir.</p>
               </div>
 
               {/* Ödeme Bilgileri */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-6 space-y-4">
+              <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 sm:p-6 space-y-4">
                 <h3 className="text-lg font-bold text-red-500 uppercase">Ödeme Bilgileri / Payment Info</h3>
                 
                 <div className="space-y-3 text-sm">
@@ -318,10 +318,10 @@ export default function RegisterPage() {
                   
                   <div className="space-y-2">
                     <p className="text-zinc-400 font-semibold">EFT / Havale Bilgileri:</p>
-                    <div className="bg-black p-4 rounded-lg space-y-1 text-zinc-300">
+                    <div className="bg-black p-4 rounded-lg space-y-1 text-zinc-300 text-xs sm:text-sm">
                       <p><span className="text-zinc-500">Banka:</span> _______________</p>
                       <p><span className="text-zinc-500">Hesap Sahibi:</span> _______________</p>
-                      <p><span className="text-zinc-500">IBAN:</span> TR__ ____ ____ ____ ____ ____ __</p>
+                      <p className="break-all"><span className="text-zinc-500">IBAN:</span> TR__ ____ ____ ____ ____ ____ __</p>
                       <p><span className="text-zinc-500">SWIFT:</span> _______________</p>
                     </div>
                   </div>
