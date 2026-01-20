@@ -12,7 +12,7 @@ export default function AboutSection() {
         <div className="w-full lg:w-1/2">
           <div className="relative h-[400px] lg:h-full min-h-[500px] w-full overflow-hidden rounded-2xl shadow-xl">
             <Image
-              src="/img/about-img.png"
+              src="/img/about-img.jpg"
               alt="About"
               fill
               className="object-cover"
