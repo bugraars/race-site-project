@@ -46,7 +46,7 @@ export default function Home() {
           {/* Sol Kısım */}
           <HeroContent />
 
-          {/* Sağ Kısım  Countdown eklenecek */}
+          {/* Sağ Kısım <CountdownTimer /> eklenecek*/}
           
         </div>
       </header>
