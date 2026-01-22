@@ -1,5 +1,7 @@
 "use client";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 interface TermsModalProps {
   type: "terms" | "privacy";
@@ -8,7 +10,31 @@ interface TermsModalProps {
 }
 
 export default function TermsModal({ type, onClose, onAccept }: TermsModalProps) {
+  const t = useTranslations("TermsModal");
   const isTerms = type === "terms";
+  const [canAccept, setCanAccept] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Scroll kontrolü - en alta indiğinde butonu aktif et
+  const handleScroll = () => {
+    if (contentRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
+      // 20px tolerans ile en alta ulaştığını kontrol et
+      if (scrollTop + clientHeight >= scrollHeight - 20) {
+        setCanAccept(true);
+      }
+    }
+  };
+
+  // İçerik kısa ise direkt aktif et
+  useEffect(() => {
+    if (contentRef.current) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight <= clientHeight) {
+        setCanAccept(true);
+      }
+    }
+  }, []);
 
   return (
     <motion.div
@@ -28,7 +54,7 @@ export default function TermsModal({ type, onClose, onAccept }: TermsModalProps)
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-black text-red-500 uppercase italic">
-            {isTerms ? "Mesafeli Satış Sözleşmesi" : "Gizlilik Politikası & KVKK"}
+            {isTerms ? t("terms_title") : t("privacy_title")}
           </h2>
           <button onClick={onClose} className="text-zinc-500 hover:text-white p-2">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,138 +64,86 @@ export default function TermsModal({ type, onClose, onAccept }: TermsModalProps)
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto pr-2 text-zinc-300 text-sm space-y-4 mb-4">
+        <div 
+          ref={contentRef}
+          onScroll={handleScroll}
+          className="flex-1 overflow-y-auto pr-2 text-zinc-300 text-sm space-y-4 mb-4"
+        >
           {isTerms ? (
             <>
-              <h3 className="text-white font-bold">1. TARAFLAR</h3>
-              <p>
-                İşbu sözleşme, <strong>NFC Racer</strong> (bundan böyle "SATICI" olarak anılacaktır) ile
-                kayıt formunu dolduran yarışçı (bundan böyle "ALICI" olarak anılacaktır) arasında,
-                aşağıda belirtilen hüküm ve şartlar çerçevesinde akdedilmiştir.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section1_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section1_content") }} />
 
-              <h3 className="text-white font-bold">2. KONU</h3>
-              <p>
-                İşbu sözleşmenin konusu, ALICI'nın SATICI'ya ait web sitesinden elektronik ortamda
-                siparişini verdiği yarış katılım hakkının satışı ve teslimi ile ilgili olarak 6502 sayılı
-                Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmelere Dair Yönetmelik hükümleri
-                gereğince tarafların hak ve yükümlülüklerini kapsamaktadır.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section2_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section2_content") }} />
 
-              <h3 className="text-white font-bold">3. SÖZLEŞME KONUSU HİZMET</h3>
-              <p>
-                - Hizmet: Yarış katılım hakkı ve etkinlik paketi<br />
-                - Fiyat: €450 (KDV dahil)<br />
-                - Teslimat: Yarış günü, kayıt masasında
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section3_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section3_content") }} />
 
-              <h3 className="text-white font-bold">4. GENEL HÜKÜMLER</h3>
-              <p>
-                4.1. ALICI, SATICI'ya ait internet sitesinde sözleşme konusu hizmetin temel nitelikleri,
-                satış fiyatı ve ödeme şekli ile teslimata ilişkin ön bilgileri okuyup bilgi sahibi olduğunu,
-                elektronik ortamda gerekli teyidi verdiğini kabul, beyan ve taahhüt eder.
-              </p>
-              <p>
-                4.2. ALICI, sözleşmeyi onaylayarak, sipariş onayı ile birlikte ödemeyi gerçekleştirdiğini
-                kabul eder.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section4_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section4_content1") }} />
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section4_content2") }} />
 
-              <h3 className="text-white font-bold">5. CAYMA HAKKI</h3>
-              <p>
-                ALICI, etkinlik tarihinden 14 gün öncesine kadar herhangi bir gerekçe göstermeksizin ve
-                cezai şart ödemeksizin cayma hakkını kullanabilir. Etkinlik tarihine 14 günden az kalmış
-                ise cayma hakkı kullanılamaz.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section5_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section5_content") }} />
 
-              <h3 className="text-white font-bold">6. SORUMLULUK</h3>
-              <p>
-                6.1. Yarış sırasında meydana gelebilecek kaza, yaralanma veya kayıplardan SATICI sorumlu
-                tutulamaz.<br />
-                6.2. ALICI, yarışa katılmak için gerekli sağlık durumuna sahip olduğunu beyan eder.<br />
-                6.3. ALICI, yarış kurallarına uymayı kabul ve taahhüt eder.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section6_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section6_content") }} />
 
-              <h3 className="text-white font-bold">7. YETKİLİ MAHKEME</h3>
-              <p>
-                İşbu sözleşmeden doğan uyuşmazlıklarda Türkiye Cumhuriyeti yasaları uygulanır.
-              </p>
+              <h3 className="text-white font-bold">{t("terms_section7_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("terms_section7_content") }} />
             </>
           ) : (
             <>
-              <h3 className="text-white font-bold">1. VERİ SORUMLUSU</h3>
-              <p>
-                6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, kişisel verileriniz;
-                veri sorumlusu olarak <strong>NFC Racer</strong> tarafından aşağıda açıklanan kapsamda
-                işlenebilecektir.
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section1_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section1_content") }} />
 
-              <h3 className="text-white font-bold">2. TOPLANAN KİŞİSEL VERİLER</h3>
-              <p>
-                - Kimlik bilgileri (Ad, soyad, T.C. kimlik/pasaport numarası, doğum tarihi)<br />
-                - İletişim bilgileri (E-posta, telefon numarası)<br />
-                - Sağlık bilgileri (Kan grubu, acil durum iletişim bilgileri)<br />
-                - Ödeme bilgileri (Kart bilgileri, işlem geçmişi)
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section2_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section2_content") }} />
 
-              <h3 className="text-white font-bold">3. VERİLERİN İŞLENME AMAÇLARI</h3>
-              <p>
-                Kişisel verileriniz aşağıdaki amaçlarla işlenebilecektir:<br />
-                - Yarış kaydının oluşturulması ve takibi<br />
-                - Ödeme işlemlerinin gerçekleştirilmesi<br />
-                - Yasal yükümlülüklerin yerine getirilmesi<br />
-                - Acil durumlarda iletişim kurulması<br />
-                - Etkinlik duyuruları ve bilgilendirme
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section3_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section3_content") }} />
 
-              <h3 className="text-white font-bold">4. VERİLERİN AKTARIMI</h3>
-              <p>
-                Kişisel verileriniz, yukarıda belirtilen amaçların gerçekleştirilmesi doğrultusunda,
-                hizmet aldığımız iş ortaklarımıza, yetkili kamu kurum ve kuruluşlarına ve hukuki
-                zorunluluklar kapsamında ilgili taraflara aktarılabilecektir.
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section4_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section4_content") }} />
 
-              <h3 className="text-white font-bold">5. VERİ SAHİBİNİN HAKLARI</h3>
-              <p>
-                KVKK'nın 11. maddesi uyarınca, aşağıdaki haklara sahipsiniz:<br />
-                - Kişisel verilerinizin işlenip işlenmediğini öğrenme<br />
-                - Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme<br />
-                - Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme<br />
-                - Kişisel verilerin düzeltilmesini veya silinmesini isteme
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section5_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section5_content") }} />
 
-              <h3 className="text-white font-bold">6. VERİ GÜVENLİĞİ</h3>
-              <p>
-                Kişisel verilerinizin hukuka aykırı olarak işlenmesini ve erişilmesini önlemek ile
-                muhafazasını sağlamak için uygun güvenlik düzeyini temin etmeye yönelik gerekli her türlü
-                teknik ve idari tedbirler alınmaktadır. Kredi kartı bilgileriniz 256-bit SSL şifrelemesi
-                ile korunmakta olup, sistemlerimizde saklanmamaktadır.
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section6_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section6_content") }} />
 
-              <h3 className="text-white font-bold">7. İLETİŞİM</h3>
-              <p>
-                KVKK kapsamındaki taleplerinizi info@nfcracer.com e-posta adresine iletebilirsiniz.
-              </p>
+              <h3 className="text-white font-bold">{t("privacy_section7_title")}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t("privacy_section7_content") }} />
             </>
           )}
         </div>
 
         {/* Footer */}
-        <div className="flex gap-3 pt-4 border-t border-zinc-800">
-          <button
-            onClick={onClose}
-            className="flex-1 bg-zinc-800 text-white font-bold h-12 rounded-xl uppercase text-sm"
-          >
-            Kapat
-          </button>
-          <button
-            onClick={() => {
-              onAccept();
-              onClose();
-            }}
-            className="flex-1 bg-red-500 text-white font-bold h-12 rounded-xl uppercase text-sm"
-          >
-            Okudum, Kabul Ediyorum
-          </button>
+        <div className="pt-4 border-t border-zinc-800">
+          {!canAccept && (
+            <p className="text-zinc-500 text-xs text-center mb-3">
+              {t("scroll_hint")}
+            </p>
+          )}
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="flex-1 bg-zinc-800 text-white font-bold h-12 rounded-xl uppercase text-sm"
+            >
+              {t("close")}
+            </button>
+            <button
+              onClick={() => {
+                onAccept();
+                onClose();
+              }}
+              disabled={!canAccept}
+              className="flex-1 bg-red-500 text-white font-bold h-12 rounded-xl uppercase text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {t("accept")}
+            </button>
+          </div>
         </div>
       </motion.div>
     </motion.div>
