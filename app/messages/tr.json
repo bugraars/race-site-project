@@ -125,6 +125,11 @@
     "card_error_holder": "Kart sahibi adı gerekli",
     "card_error_expiry": "Son kullanma tarihi gerekli",
     "card_error_cvv": "CVV 3 haneli olmalı",
+    "bib_taken": "Bu yarışçı numarası zaten alınmış.",
+    "email_registered": "Bu e-posta zaten kayıtlı.",
+    "invalid_email": "Geçersiz e-posta formatı.",
+    "email_not_verified": "E-posta doğrulanmadı. Lütfen önce e-postanızı doğrulayın.",
+    "unknown_error": "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyin."
     "card_security_note": "Bu kartla yapılan işlemler güvenli ödeme altyapısı ile korunmaktadır.",
     "cancel": "İptal",
     "pay": "ÖDE"

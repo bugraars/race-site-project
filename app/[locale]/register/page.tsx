@@ -35,6 +35,19 @@ const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "0+", "0-"];
 // Tişört bedenleri
 const tshirtSizes = ["S", "M", "L", "XL", "XXL"];
 
+// Utility: Map BE error message to translation key
+const errorMessageToKey = (msg: string) => {
+  if (!msg) return "unknown_error";
+  if (msg.includes("already taken")) return "bib_taken";
+  if (msg.includes("already registered")) return "email_registered";
+  if (msg.includes("Invalid email format")) return "invalid_email";
+  if (msg.includes("Email not verified")) return "email_not_verified";
+  if (msg.includes("Failed to send email")) return "email_send_error";
+  if (msg.includes("Invalid code")) return "code_error";
+  if (msg.includes("Registration failed")) return "registration_error";
+  return "unknown_error";
+};
+
 export default function RegisterPage() {
   const t = useTranslations("Register");
   
@@ -96,7 +109,7 @@ export default function RegisterPage() {
     if (result.success) {
       next();
     } else {
-      setError(result.error || t("email_send_error"));
+      setError(t(errorMessageToKey(result.error ?? result.message ?? "")));
     }
     setLoading(false);
   };
@@ -109,7 +122,7 @@ export default function RegisterPage() {
     if (result.success) {
       next();
     } else {
-      setError(result.error || t("code_error"));
+      setError(t(errorMessageToKey(result.error ?? result.message ?? "")));
     }
     setLoading(false);
   };
@@ -140,7 +153,7 @@ export default function RegisterPage() {
       }
       next();
     } else {
-      setError(result.error || t("registration_error"));
+      setError(t(errorMessageToKey(result.error ?? result.message ?? "")));
     }
     setLoading(false);
   };

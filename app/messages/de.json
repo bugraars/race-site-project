@@ -125,6 +125,11 @@
     "card_error_holder": "Name des Karteninhabers erforderlich",
     "card_error_expiry": "Ablaufdatum erforderlich",
     "card_error_cvv": "CVV muss 3-stellig sein",
+    "bib_taken": "Diese Startnummer ist bereits vergeben.",
+    "email_registered": "Diese E-Mail ist bereits registriert.",
+    "invalid_email": "Ungültiges E-Mail-Format.",
+    "email_not_verified": "E-Mail nicht verifiziert. Bitte verifizieren Sie zuerst Ihre E-Mail.",
+    "unknown_error": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
     "card_security_note": "Transaktionen mit dieser Karte sind durch sichere Zahlungsinfrastruktur geschützt.",
     "cancel": "Abbrechen",
     "pay": "BEZAHLEN"

@@ -125,6 +125,11 @@
     "card_error_holder": "Card holder name is required",
     "card_error_expiry": "Expiry date is required",
     "card_error_cvv": "CVV must be 3 digits",
+    "bib_taken": "This bib number is already taken.",
+    "email_registered": "This email is already registered.",
+    "invalid_email": "Invalid email format.",
+    "email_not_verified": "Email not verified. Please verify your email first.",
+    "unknown_error": "An unknown error occurred. Please try again."
     "card_security_note": "Transactions with this card are protected by secure payment infrastructure.",
     "cancel": "Cancel",
     "pay": "PAY"
