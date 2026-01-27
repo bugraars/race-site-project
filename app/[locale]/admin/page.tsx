@@ -122,10 +122,20 @@ export default function AdminLoginPage() {
           </form>
 
           {/* Footer */}
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center space-y-3">
             <p className="text-sm text-gray-500">
               Bu sayfaya sadece admin hesapları erişebilir
             </p>
+            <button
+              type="button"
+              onClick={() => router.push('/')}
+              className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Anasayfaya Dön
+            </button>
           </div>
         </div>
       </div>
