@@ -38,12 +38,12 @@ export default function AdminLoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Giriş başarısız');
+        throw new Error(data.message || t('login_failed'));
       }
 
       // Admin kontrolü
       if (data.staff.role !== 'ADMIN') {
-        throw new Error('Bu sayfaya sadece admin erişebilir');
+        throw new Error(t('admin_access_only'));
       }
 
       // Token'ı localStorage'a kaydet
@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
       // Admin paneline yönlendir (şimdilik boş sayfa)
       router.push('/admin/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Giriş yapılırken bir hata oluştu');
+      setError(err.message || t('login_failed'));
     } finally {
       setLoading(false);
     }
@@ -65,8 +65,8 @@ export default function AdminLoginPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Girişi</h1>
-            <p className="text-gray-600">Sisteme giriş yapmak için bilgilerinizi girin</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+            <p className="text-gray-600">{t('subtitle')}</p>
           </div>
 
           {/* Error Message */}
@@ -80,7 +80,7 @@ export default function AdminLoginPage() {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label htmlFor="staffCode" className="block text-sm font-medium text-gray-700 mb-2">
-                Staff Code
+                {t('staff_code')}
               </label>
               <input
                 id="staffCode"
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
 
             <div>
               <label htmlFor="pin" className="block text-sm font-medium text-gray-700 mb-2">
-                PIN
+                {t('pin')}
               </label>
               <input
                 id="pin"
@@ -117,14 +117,14 @@ export default function AdminLoginPage() {
               disabled={loading}
               className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+              {loading ? t('logging_in') : t('login')}
             </button>
           </form>
 
           {/* Footer */}
           <div className="mt-6 text-center space-y-3">
             <p className="text-sm text-gray-500">
-              Bu sayfaya sadece admin hesapları erişebilir
+              {t('admin_only')}
             </p>
             <button
               type="button"
@@ -134,7 +134,7 @@ export default function AdminLoginPage() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Anasayfaya Dön
+              {t('go_home')}
             </button>
           </div>
         </div>

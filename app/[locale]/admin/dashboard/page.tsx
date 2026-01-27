@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import AdminMenuBar from '@/app/Components/AdminMenuBar';
 
 interface AdminStaff {
@@ -15,6 +16,7 @@ interface AdminStaff {
 
 export default function AdminDashboardPage() {
   const router = useRouter();
+  const t = useTranslations('AdminDashboard');
   const [staff, setStaff] = useState<AdminStaff | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState('staff');
@@ -59,7 +61,7 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Yükleniyor...</div>
+        <div className="text-gray-600">{t('loading')}</div>
       </div>
     );
   }
@@ -84,12 +86,12 @@ export default function AdminDashboardPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            {selectedSubMenu ? `${selectedMenu} > ${selectedSubMenu}` : 'Admin Paneli'}
+            {selectedSubMenu ? `${selectedMenu} > ${selectedSubMenu}` : t('admin_panel')}
           </h2>
           <p className="text-gray-600">
             {selectedSubMenu 
-              ? `Seçilen modül: ${selectedSubMenu}` 
-              : 'Yukarıdaki menüden bir modül seçin.'
+              ? `${t('selected_module')}: ${selectedSubMenu}` 
+              : t('select_module')
             }
           </p>
         </div>

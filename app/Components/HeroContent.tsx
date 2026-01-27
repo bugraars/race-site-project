@@ -12,9 +12,7 @@ export default function HeroContent() {
             </h1>
 
             <div className="mt-6 flex flex-col md:flex-row items-center md:items-start gap-1 md:gap-3 text-xl md:text-3xl font-bold uppercase tracking-tight">
-                <span className="text-white">Hard Enduro Kemer</span>
-                {/* <span className="text-white">Hard Enduro 14-15 {t('february')}</span> */}
-
+                <span className="text-white">{t('title')} Kemer</span>
             </div>
 
             <div className="mt-6 w-full md:w-auto flex justify-center md:justify-start">

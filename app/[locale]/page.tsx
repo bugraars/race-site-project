@@ -11,6 +11,7 @@ import RaceMap from '../Components/RaceMap';
 import Footer from '../Components/Footer';
 import HeroContent from '../Components/HeroContent';
 import CountdownTimer from '../Components/CountdownTimer';
+import ContactSection from '../Components/ContactSection';
 
 
 export default function Home() {
@@ -79,6 +80,9 @@ export default function Home() {
           {/* Harita Bileşeni */}
           <RaceMap />
         </section>
+
+        {/* İletişim Bölümü */}
+        <ContactSection />
       </main>
       <footer>
         <Footer />
