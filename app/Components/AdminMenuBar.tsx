@@ -200,8 +200,8 @@ export default function AdminMenuBar({ onSelect, selectedKey, selectedSubKey, on
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Ana Menü */}
         <div className="flex items-center gap-4 py-2">
-          {/* Logo - Sola Dayalı, Daha Büyük */}
-          <a href="/" className="flex-shrink-0">
+          {/* Logo - Sadece Desktop'ta görünür */}
+          <a href="/" className="flex-shrink-0 hidden sm:block">
             <img 
               src="/img/logo.png" 
               alt="Logo" 
@@ -222,8 +222,8 @@ export default function AdminMenuBar({ onSelect, selectedKey, selectedSubKey, on
                   <button
                     key={item.key}
                     className={`
-                      flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap font-medium 
-                      transition-all duration-200 ease-out flex-shrink-0
+                      flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl whitespace-nowrap font-medium 
+                      transition-all duration-200 ease-out flex-shrink-0 text-sm sm:text-base
                       ${selectedKey === item.key 
                         ? "bg-red-500 text-white shadow-md" 
                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -231,8 +231,8 @@ export default function AdminMenuBar({ onSelect, selectedKey, selectedSubKey, on
                     `}
                     onClick={() => handleMenuClick(item.key)}
                   >
-                    {item.icon}
-                    <span className="hidden sm:inline">{item.label}</span>
+                    <span className="hidden sm:inline">{item.icon}</span>
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
