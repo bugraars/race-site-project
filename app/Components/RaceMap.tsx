@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useTranslations, useLocale } from 'next-intl';
 
-mapboxgl.accessToken = process.env.NEXT_MAPBOX_TOKEN || 'pk.eyJ1IjoiYnVncmFhcnMiLCJhIjoiY21qaWRpaDRzMWhwdjNocXhkOHVjN3YwayJ9.1uR9bKzPv-8zPhyzidNGkQ';
+// Mapbox token - NEXT_PUBLIC_ prefix required for client-side access
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'pk.eyJ1Ijoib2x5bXBvc2hhcmRlbmR1cm8iLCJhIjoiY21rYmhzZjdxMDBqZTNlcXo0Z3Z2dGVraiJ9.AwtRaRMIws_YlTSrnBqmig';
 
-const API_URL = 'https://t8wdcqtmvn.eu-central-1.awsapprunner.com/api';
+// API URL - use NEXT_PUBLIC for client-side access
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 interface Checkpoint {
   id: number;
@@ -35,20 +37,32 @@ interface EventData {
 // Skeleton Loading Component
 const MapSkeleton = () => (
   <div className="relative w-full h-[600px] overflow-hidden bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl font-sans">
-    {/* Map area skeleton */}
-    <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 animate-pulse">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 mx-auto border-4 border-red-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-zinc-500 text-sm font-medium">Harita yükleniyor...</p>
-        </div>
-      </div>
+    {/* Animated gradient background */}
+    <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-800 animate-pulse" />
+    
+    {/* Shimmer effect */}
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute -inset-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-700/20 to-transparent skew-x-12" />
     </div>
     
-    {/* Skeleton markers */}
-    <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
-    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
-    <div className="absolute bottom-1/3 right-1/3 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
+    {/* Content */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center">
+      {/* Map icon with pulse */}
+      <div className="relative mb-4">
+        <div className="w-20 h-20 rounded-2xl bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+          <svg className="w-10 h-10 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+        </div>
+        {/* Ping animation */}
+        <div className="absolute -inset-1 rounded-2xl bg-red-500/20 animate-ping" />
+      </div>
+      
+      <span className="text-zinc-400 text-sm font-medium">Harita yükleniyor</span>
+    </div>
+    
+    {/* Bottom gradient fade */}
+    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-zinc-900 to-transparent" />
   </div>
 );
 
@@ -66,6 +80,13 @@ const RaceMap = () => {
   const [isStyleLoaded, setIsStyleLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Debug: Component mount
+  useEffect(() => {
+    console.log('[RaceMap] Component mounted');
+    console.log('[RaceMap] API_URL:', API_URL);
+    console.log('[RaceMap] Mapbox Token:', mapboxgl.accessToken ? 'SET' : 'NOT SET');
+  }, []);
+
   // Seçili rotanın noktaları
   const currentRoute = routes.find(r => r.id === selectedRouteId);
   const checkpoints = currentRoute?.points || [];
@@ -73,6 +94,7 @@ const RaceMap = () => {
   useEffect(() => {
     const fetchRoutes = async () => {
       setLoading(true);
+      console.log('[RaceMap] Fetching routes from:', `${API_URL}/route/active`);
       try {
         const res = await fetch(`${API_URL}/route/active`);
         
@@ -154,9 +176,27 @@ const RaceMap = () => {
     fetchRoutes();
   }, []);
 
-  // Harita oluştur
+  // Harita oluştur - loading false olunca container DOM'da olur
   useEffect(() => {
-    if (!mapContainerRef.current) return;
+    // Loading durumunda container henüz yok
+    if (loading) {
+      console.log('[RaceMap] Still loading, skipping map init');
+      return;
+    }
+    
+    if (!mapContainerRef.current) {
+      console.log('[RaceMap] Container ref not ready');
+      return;
+    }
+    
+    // Zaten map varsa tekrar oluşturma
+    if (mapRef.current) {
+      console.log('[RaceMap] Map already exists');
+      return;
+    }
+    
+    console.log('[RaceMap] Initializing map with token:', mapboxgl.accessToken?.substring(0, 20) + '...');
+    
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/satellite-streets-v12',
@@ -165,7 +205,16 @@ const RaceMap = () => {
       pitch: 60,
     });
 
+    map.on('error', (e) => {
+      console.error('[RaceMap] Map error:', e.error);
+    });
+
+    map.on('load', () => {
+      console.log('[RaceMap] Map loaded successfully');
+    });
+
     map.on('style.load', () => {
+      console.log('[RaceMap] Style loaded, adding terrain');
       map.addSource('mapbox-dem', {
         type: 'raster-dem',
         url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
@@ -177,8 +226,12 @@ const RaceMap = () => {
     });
 
     mapRef.current = map;
-    return () => map.remove();
-  }, []);
+    return () => {
+      console.log('[RaceMap] Cleaning up map');
+      map.remove();
+      mapRef.current = null;
+    };
+  }, [loading]); // loading false olunca çalışsın
 
   // Rota değiştiğinde haritayı güncelle
   useEffect(() => {
