@@ -344,35 +344,35 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm min-w-[800px]">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_time')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_level')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_category')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_action')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_message')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_staff')}</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_trace_id')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_time')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_level')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_category')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_action')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_message')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_staff')}</th>
+                  <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">{t('logs_trace_id')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {logs.map((log) => (
                   <tr key={log.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-gray-600 font-mono text-xs">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-gray-600 font-mono text-[10px] sm:text-xs">
                       {formatDate(log.createdAt)}
                     </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${LEVEL_COLORS[log.level]}`}>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className={`px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs font-medium ${LEVEL_COLORS[log.level]}`}>
                         {log.level}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${CATEGORY_COLORS[log.category]}`}>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className={`px-1.5 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs font-medium ${CATEGORY_COLORS[log.category]}`}>
                         {log.category}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-gray-900 font-medium">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 font-medium text-xs sm:text-sm">
                       {log.action}
                     </td>
                     <td className="px-6 py-4 text-gray-600 max-w-md truncate" title={log.message}>
@@ -405,8 +405,8 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
-            <div className="text-sm text-gray-600">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-3 sm:px-4 py-3 border-t border-gray-200 bg-gray-50">
+            <div className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
               {t('logs_showing', { 
                 from: ((page - 1) * pageSize) + 1, 
                 to: Math.min(page * pageSize, total), 
@@ -417,17 +417,17 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
               <button
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page === 1 || loading}
-                className="px-3 py-1 border border-gray-200 rounded-lg text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2 sm:px-3 py-1.5 border border-gray-200 rounded-lg text-xs sm:text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t('previous')}
               </button>
-              <span className="text-sm text-gray-600">
+              <span className="text-xs sm:text-sm text-gray-600 min-w-[60px] text-center">
                 {page} / {totalPages}
               </span>
               <button
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages || loading}
-                className="px-3 py-1 border border-gray-200 rounded-lg text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2 sm:px-3 py-1.5 border border-gray-200 rounded-lg text-xs sm:text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t('next')}
               </button>

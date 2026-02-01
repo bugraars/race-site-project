@@ -548,12 +548,12 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
                   return (
                     <div
                       key={point.id}
-                      className={`p-4 hover:bg-gray-50 transition-colors ${!point.isActive ? 'opacity-50' : ''}`}
+                      className={`p-2 sm:p-4 hover:bg-gray-50 transition-colors ${!point.isActive ? 'opacity-50' : ''}`}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         {/* Order & Checkpoint Badge */}
-                        <div className="flex flex-col items-center gap-1">
-                          <span className={`w-8 h-8 flex items-center justify-center font-bold rounded-full text-sm ${
+                        <div className="flex flex-col items-center gap-0.5 sm:gap-1 flex-shrink-0">
+                          <span className={`w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-bold rounded-full text-xs sm:text-sm ${
                             point.isCheckpoint 
                               ? 'bg-red-500 text-white' 
                               : 'bg-gray-100 text-gray-600'
@@ -561,7 +561,7 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
                             {index + 1}
                           </span>
                           {point.isCheckpoint && (
-                            <span className="text-[10px] font-bold text-red-500">
+                            <span className="text-[8px] sm:text-[10px] font-bold text-red-500">
                               {point.checkpointCode}
                             </span>
                           )}
@@ -572,11 +572,11 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
                           <img
                             src={point.imageUrl}
                             alt={title.tr}
-                            className="w-16 h-12 object-cover rounded-lg border border-gray-200"
+                            className="w-10 h-8 sm:w-16 sm:h-12 object-cover rounded-lg border border-gray-200 flex-shrink-0"
                           />
                         ) : (
-                          <div className="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
-                            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="w-10 h-8 sm:w-16 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200 flex-shrink-0">
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
@@ -585,13 +585,13 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
 
                         {/* Info */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 truncate">{title.tr}</h4>
-                          <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-400">
+                          <h4 className="font-medium text-gray-900 truncate text-sm sm:text-base">{title.tr}</h4>
+                          <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-0.5 text-[10px] sm:text-xs text-gray-400">
                             <span>{point.elevation}</span>
+                            <span className="hidden sm:inline">•</span>
+                            <span className="hidden sm:inline">{point.longitude.toFixed(4)}, {point.latitude.toFixed(4)}</span>
                             <span>•</span>
-                            <span>{point.longitude.toFixed(4)}, {point.latitude.toFixed(4)}</span>
-                            <span>•</span>
-                            <span className={`px-1.5 py-0.5 rounded ${
+                            <span className={`px-1 sm:px-1.5 py-0.5 rounded ${
                               point.difficulty === 1 ? 'bg-green-100 text-green-700' :
                               point.difficulty === 2 ? 'bg-yellow-100 text-yellow-700' :
                               'bg-red-100 text-red-700'
@@ -602,46 +602,46 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
                         </div>
 
                         {/* Actions */}
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
                           <button
                             onClick={() => handleMovePoint(point.id, 'up')}
                             disabled={index === 0}
-                            className="p-1.5 text-gray-400 hover:text-gray-600 disabled:opacity-30"
+                            className="p-1 sm:p-1.5 text-gray-400 hover:text-gray-600 disabled:opacity-30"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                             </svg>
                           </button>
                           <button
                             onClick={() => handleMovePoint(point.id, 'down')}
                             disabled={index === points.length - 1}
-                            className="p-1.5 text-gray-400 hover:text-gray-600 disabled:opacity-30"
+                            className="p-1 sm:p-1.5 text-gray-400 hover:text-gray-600 disabled:opacity-30"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                           </button>
                           <button
                             onClick={() => handleToggleActive(point)}
-                            className={`p-1.5 ${point.isActive ? 'text-green-500' : 'text-gray-400'}`}
+                            className={`p-1 sm:p-1.5 ${point.isActive ? 'text-green-500' : 'text-gray-400'}`}
                           >
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                             </svg>
                           </button>
                           <button
                             onClick={() => handleEditPoint(point)}
-                            className="p-1.5 text-blue-500 hover:text-blue-600"
+                            className="p-1 sm:p-1.5 text-blue-500 hover:text-blue-600"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                           </button>
                           <button
                             onClick={() => handleDeletePoint(point.id)}
-                            className="p-1.5 text-red-500 hover:text-red-600"
+                            className="p-1 sm:p-1.5 text-red-500 hover:text-red-600"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
                           </button>

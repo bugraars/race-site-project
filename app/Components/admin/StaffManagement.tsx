@@ -265,30 +265,32 @@ export default function StaffManagement({ onError }: StaffManagementProps) {
 
       {/* Event Seçici - Checkpoint atama için */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
           <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
             {t('staff_select_event_for_checkpoint')}:
           </label>
-          <select
-            value={selectedEventId || ''}
-            onChange={(e) => setSelectedEventId(e.target.value ? Number(e.target.value) : null)}
-            className="flex-1 max-w-md px-4 py-2 border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
-          >
-            <option value="">{t('staff_select_event')}</option>
-            {events.map((event) => (
-              <option key={event.id} value={event.id}>
-                {event.name} {event.isActive ? '(Aktif)' : ''}
-              </option>
-            ))}
-          </select>
-          {checkpointsLoading && (
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-red-500"></div>
-          )}
-          {selectedEventId && !checkpointsLoading && (
-            <span className="text-sm text-gray-500">
-              {checkpoints.length} checkpoint
-            </span>
-          )}
+          <div className="flex items-center gap-2 sm:gap-4 flex-1">
+            <select
+              value={selectedEventId || ''}
+              onChange={(e) => setSelectedEventId(e.target.value ? Number(e.target.value) : null)}
+              className="flex-1 sm:max-w-md px-3 sm:px-4 py-2 border border-gray-200 rounded-lg bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
+            >
+              <option value="">{t('staff_select_event')}</option>
+              {events.map((event) => (
+                <option key={event.id} value={event.id}>
+                  {event.name} {event.isActive ? '(Aktif)' : ''}
+                </option>
+              ))}
+            </select>
+            {checkpointsLoading && (
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-red-500 flex-shrink-0"></div>
+            )}
+            {selectedEventId && !checkpointsLoading && (
+              <span className="text-xs sm:text-sm text-gray-500 whitespace-nowrap flex-shrink-0">
+                {checkpoints.length} <span className="hidden sm:inline">checkpoint</span><span className="sm:hidden">CP</span>
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

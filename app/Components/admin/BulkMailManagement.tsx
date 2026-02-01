@@ -492,47 +492,49 @@ export default function BulkMailManagement({ staffId }: BulkMailManagementProps)
       />
 
       {/* Header */}
-      <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-            <UsersIcon />
-            Toplu Mail
-          </h2>
-          {stats && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs px-3 py-1.5 rounded-full bg-green-100 text-green-700 font-medium">
-                {stats.active} Aktif
-              </span>
-              <span className="text-xs px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium">
-                {stats.total} Toplam
-              </span>
-            </div>
-          )}
-        </div>
+      <div className="p-3 sm:p-4 bg-white border-b border-gray-200">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <UsersIcon />
+              <span className="hidden xs:inline">Toplu Mail</span>
+            </h2>
+            {stats && (
+              <div className="flex items-center gap-1 sm:gap-2">
+                <span className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-green-100 text-green-700 font-medium">
+                  {stats.active} <span className="hidden sm:inline">Aktif</span>
+                </span>
+                <span className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium">
+                  {stats.total} <span className="hidden sm:inline">Toplam</span>
+                </span>
+              </div>
+            )}
+          </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleImport}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 text-sm font-medium transition-colors"
-            title="Doğrulama kodlarından import et"
-          >
-            <ImportIcon />
-            Import
-          </button>
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-3 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 text-sm font-medium transition-colors"
-          >
-            <PlusIcon />
-            Abone Ekle
-          </button>
-          <button
-            onClick={() => { loadSubscribers(); loadStats(); }}
-            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-            title="Yenile"
-          >
-            <RefreshIcon />
-          </button>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <button
+              onClick={handleImport}
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-blue-500 text-white rounded-lg sm:rounded-xl hover:bg-blue-600 text-xs sm:text-sm font-medium transition-colors"
+              title="Doğrulama kodlarından import et"
+            >
+              <ImportIcon />
+              <span className="hidden sm:inline">Import</span>
+            </button>
+            <button
+              onClick={() => setShowAddModal(true)}
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-green-500 text-white rounded-lg sm:rounded-xl hover:bg-green-600 text-xs sm:text-sm font-medium transition-colors"
+            >
+              <PlusIcon />
+              <span className="hidden sm:inline">Abone Ekle</span>
+            </button>
+            <button
+              onClick={() => { loadSubscribers(); loadStats(); }}
+              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              title="Yenile"
+            >
+              <RefreshIcon />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -548,57 +550,59 @@ export default function BulkMailManagement({ staffId }: BulkMailManagementProps)
       )}
 
       {/* Filters & Search */}
-      <div className="p-4 bg-gray-50 border-b flex flex-wrap items-center gap-3">
-        <select
-          value={sourceFilter}
-          onChange={(e) => {
-            setSourceFilter(e.target.value as SubscriberSource | '');
-            setSubscribersPage(1);
-          }}
-          className="px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all appearance-none pr-8 bg-no-repeat bg-right"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundSize: '20px', backgroundPosition: 'right 8px center' }}
-        >
-          <option value="">Tüm Kaynaklar</option>
-          <option value="VERIFICATION">Doğrulama</option>
-          <option value="REGISTRATION">Kayıt</option>
-          <option value="NEWSLETTER">Bülten</option>
-          <option value="MANUAL">Manuel</option>
-        </select>
+      <div className="p-3 sm:p-4 bg-gray-50 border-b">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <div className="flex gap-2">
+            <select
+              value={sourceFilter}
+              onChange={(e) => {
+                setSourceFilter(e.target.value as SubscriberSource | '');
+                setSubscribersPage(1);
+              }}
+              className="flex-1 sm:flex-none px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+            >
+              <option value="">Tüm Kaynaklar</option>
+              <option value="VERIFICATION">Doğrulama</option>
+              <option value="REGISTRATION">Kayıt</option>
+              <option value="NEWSLETTER">Bülten</option>
+              <option value="MANUAL">Manuel</option>
+            </select>
 
-        <select
-          value={activeFilter === undefined ? '' : String(activeFilter)}
-          onChange={(e) => {
-            setActiveFilter(e.target.value === '' ? undefined : e.target.value === 'true');
-            setSubscribersPage(1);
-          }}
-          className="px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all appearance-none pr-8 bg-no-repeat bg-right"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundSize: '20px', backgroundPosition: 'right 8px center' }}
-        >
-          <option value="">Tüm Durumlar</option>
-          <option value="true">Aktif</option>
-          <option value="false">Pasif</option>
-        </select>
-
-        <div className="flex-1 flex items-center gap-2">
-          <div className="flex-1 relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              placeholder="E-posta veya isim ara..."
-              className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-            />
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-              <SearchIcon />
-            </span>
+            <select
+              value={activeFilter === undefined ? '' : String(activeFilter)}
+              onChange={(e) => {
+                setActiveFilter(e.target.value === '' ? undefined : e.target.value === 'true');
+                setSubscribersPage(1);
+              }}
+              className="flex-1 sm:flex-none px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+            >
+              <option value="">Tüm Durumlar</option>
+              <option value="true">Aktif</option>
+              <option value="false">Pasif</option>
+            </select>
           </div>
-          <button
-            onClick={handleSearch}
-            className="px-4 py-2 bg-indigo-500 text-white rounded-xl hover:bg-indigo-600 transition-all font-medium text-sm"
-          >
-            {t('search')}
-          </button>
+
+          <div className="flex-1 flex items-center gap-2">
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                placeholder="E-posta veya isim ara..."
+                className="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+              />
+              <span className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <SearchIcon />
+              </span>
+            </div>
+            <button
+              onClick={handleSearch}
+              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-500 text-white rounded-lg sm:rounded-xl hover:bg-indigo-600 transition-all font-medium text-xs sm:text-sm"
+            >
+              Ara
+            </button>
+          </div>
         </div>
       </div>
 
@@ -629,36 +633,36 @@ export default function BulkMailManagement({ staffId }: BulkMailManagementProps)
       {/* Subscribers List */}
       {!loading && (
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[700px]">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-12">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider w-10 sm:w-12">
                   <input
                     type="checkbox"
                     checked={selectAll}
                     onChange={handleSelectAll}
-                    className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    className="w-3 h-3 sm:w-4 sm:h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                 </th>
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-16">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider w-12 sm:w-16">
                   DURUM
                 </th>
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   E-POSTA
                 </th>
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   İSİM
                 </th>
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   KAYNAK
                 </th>
-                <th className="text-center px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-center px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   GÖNDERİM
                 </th>
-                <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-left px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   TARİH
                 </th>
-                <th className="text-right px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <th className="text-right px-3 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   İŞLEMLER
                 </th>
               </tr>
@@ -666,12 +670,12 @@ export default function BulkMailManagement({ staffId }: BulkMailManagementProps)
             <tbody className="divide-y divide-gray-200">
               {subscribers.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <td colSpan={8} className="px-4 sm:px-6 py-8 sm:py-12 text-center">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                       <UsersIcon />
                     </div>
-                    <p className="text-gray-500">Henüz abone yok</p>
-                    <p className="text-sm text-gray-400 mt-1">Import veya manuel ekleme yapabilirsiniz</p>
+                    <p className="text-gray-500 text-sm">Henüz abone yok</p>
+                    <p className="text-xs sm:text-sm text-gray-400 mt-1">Import veya manuel ekleme yapabilirsiniz</p>
                   </td>
                 </tr>
               ) : (

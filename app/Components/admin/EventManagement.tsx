@@ -199,23 +199,23 @@ export default function EventManagement({ onError, onEventSelect, onEventsChange
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">{t('event_list')}</h2>
-          <p className="text-gray-500 text-sm mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{t('event_list')}</h2>
+          <p className="text-gray-500 text-xs sm:text-sm mt-1">
             {t('event_total')}: <span className="font-semibold text-gray-900">{events.length}</span>
           </p>
         </div>
         <button
           onClick={openCreateModal}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-colors shadow-sm"
+          className="inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-colors shadow-sm text-sm sm:text-base w-full sm:w-auto"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
-          {t('event_add_new')}
+          <span className="truncate">{t('event_add_new')}</span>
         </button>
       </div>
 

@@ -521,39 +521,39 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
       />
 
       {/* Header */}
-      <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+      <div className="p-3 sm:p-4 bg-white border-b border-gray-200 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center gap-2">
             {viewMode === 'inbox' ? <InboxIcon /> : <HistoryIcon />}
-            {viewMode === 'inbox' ? t('mail_inbox') : t('mail_history')}
+            <span className="hidden xs:inline">{viewMode === 'inbox' ? t('mail_inbox') : t('mail_history')}</span>
           </h2>
-          <div className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium ${
+          <div className={`flex items-center gap-1 text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium ${
             connectionStatus === 'connected' ? 'bg-green-500 text-white' :
             connectionStatus === 'disconnected' ? 'bg-red-500 text-white' :
             'bg-yellow-500 text-white'
           }`}>
-            <span className={`w-2 h-2 rounded-full ${
+            <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full flex-shrink-0 ${
               connectionStatus === 'connected' ? 'bg-white' :
               connectionStatus === 'disconnected' ? 'bg-white' :
               'bg-white animate-pulse'
             }`}></span>
-            {connectionStatus === 'connected' ? t('mail_connection_ok') : connectionStatus === 'disconnected' ? t('mail_connection_error') : '...'}
+            <span className="truncate">{connectionStatus === 'connected' ? t('mail_connection_ok') : connectionStatus === 'disconnected' ? t('mail_connection_error') : '...'}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           {viewMode === 'inbox' && (
             <>
               <button
                 onClick={openComposeModal}
-                className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 text-sm font-semibold transition-colors"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-green-500 text-white rounded-lg sm:rounded-xl hover:bg-green-600 text-xs sm:text-sm font-semibold transition-colors"
               >
                 <ComposeIcon />
-                {t('mail_compose')}
+                <span className="hidden sm:inline">{t('mail_compose')}</span>
               </button>
               <button
                 onClick={() => loadInbox(inboxPage)}
-                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 title={t('mail_refresh')}
               >
                 <RefreshIcon />
@@ -563,7 +563,7 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
           {viewMode === 'history' && (
             <button
               onClick={() => loadHistory(historyPage)}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               title={t('mail_refresh')}
             >
               <RefreshIcon />
@@ -595,73 +595,75 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
       {viewMode === 'inbox' && !loading && (
         <div>
           {/* Search & Folder */}
-          <div className="p-4 bg-gray-50 border-b flex items-center gap-4">
-            <select
-              value={selectedFolder}
-              onChange={(e) => {
-                setSelectedFolder(e.target.value);
-                loadInbox(1);
-              }}
-              className="px-4 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-            >
-              {folders.length > 0 ? (
-                folders.map(folder => (
-                  <option key={folder} value={folder}>{folder}</option>
-                ))
-              ) : (
-                <option value="INBOX">INBOX</option>
-              )}
-            </select>
-
-            <div className="flex-1 flex items-center gap-2">
-              <div className="flex-1 relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  placeholder={t('mail_search') + '...'}
-                  className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-xl text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                />
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <SearchIcon />
-                </span>
-              </div>
-              <button
-                onClick={handleSearch}
-                className="px-4 py-2 bg-indigo-500 text-white rounded-xl hover:bg-indigo-600 transition-all font-medium text-sm"
+          <div className="p-3 sm:p-4 bg-gray-50 border-b">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              <select
+                value={selectedFolder}
+                onChange={(e) => {
+                  setSelectedFolder(e.target.value);
+                  loadInbox(1);
+                }}
+                className="px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all w-full sm:w-auto"
               >
-                {t('search')}
-              </button>
-              {isSearching && (
+                {folders.length > 0 ? (
+                  folders.map(folder => (
+                    <option key={folder} value={folder}>{folder}</option>
+                  ))
+                ) : (
+                  <option value="INBOX">INBOX</option>
+                )}
+              </select>
+
+              <div className="flex-1 flex items-center gap-2">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    placeholder={t('mail_search') + '...'}
+                    className="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 border-2 border-gray-200 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+                  />
+                  <span className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <SearchIcon />
+                  </span>
+                </div>
                 <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setIsSearching(false);
-                    loadInbox();
-                  }}
-                  className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                  onClick={handleSearch}
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-indigo-500 text-white rounded-lg sm:rounded-xl hover:bg-indigo-600 transition-all font-medium text-xs sm:text-sm"
                 >
-                  {t('clear_filters')}
+                  {t('search')}
                 </button>
-              )}
+                {isSearching && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setIsSearching(false);
+                      loadInbox();
+                    }}
+                    className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                  >
+                    {t('clear_filters')}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Compact Mail List */}
-          <div className="divide-y divide-gray-100">
+          {/* Compact Mail List - with horizontal scroll on mobile */}
+          <div className="divide-y divide-gray-100 overflow-x-auto">
             {mails.length === 0 ? (
-              <div className="p-12 text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="p-8 sm:p-12 text-center">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <InboxIcon />
                 </div>
-                <p className="text-gray-500">{t('mail_empty')}</p>
+                <p className="text-gray-500 text-sm">{t('mail_empty')}</p>
               </div>
             ) : (
               mails.map(mail => (
                 <div
                   key={mail.uid}
-                  className={`flex items-center gap-2 px-4 py-3 cursor-pointer group transition-all duration-200 ${
+                  className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 cursor-pointer group transition-all duration-200 min-w-[500px] sm:min-w-0 ${
                     !mail.isRead 
                       ? 'bg-blue-50 hover:bg-blue-100 border-l-4 border-l-blue-500' 
                       : 'hover:bg-gray-50 border-l-4 border-l-transparent'
@@ -698,10 +700,10 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
                   {/* Mail Content - Clickable */}
                   <div 
                     onClick={() => handleViewMail(mail)}
-                    className="flex-1 flex items-center gap-3 min-w-0"
+                    className="flex-1 flex items-center gap-2 sm:gap-3 min-w-0"
                   >
                     {/* From - Fixed width */}
-                    <div className={`w-44 flex-shrink-0 truncate text-sm ${
+                    <div className={`w-28 sm:w-44 flex-shrink-0 truncate text-xs sm:text-sm ${
                       !mail.isRead ? 'font-bold text-indigo-900' : 'text-gray-600 font-medium'
                     }`}>
                       {mail.from.name || mail.from.address}
@@ -709,13 +711,13 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
 
                     {/* Subject + Snippet */}
                     <div className="flex-1 flex items-center gap-2 min-w-0">
-                      <span className={`truncate text-sm ${
+                      <span className={`truncate text-xs sm:text-sm ${
                         !mail.isRead ? 'font-semibold text-gray-900' : 'text-gray-700'
                       }`}>
                         {mail.subject}
                       </span>
                       {mail.snippet && (
-                        <span className="text-gray-400 text-sm truncate hidden lg:inline">
+                        <span className="text-gray-400 text-xs sm:text-sm truncate hidden lg:inline">
                           — {mail.snippet}
                         </span>
                       )}
@@ -729,7 +731,7 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
                     )}
 
                     {/* Date */}
-                    <div className={`text-xs flex-shrink-0 w-20 text-right ${
+                    <div className={`text-[10px] sm:text-xs flex-shrink-0 w-14 sm:w-20 text-right ${
                       !mail.isRead ? 'text-indigo-600 font-semibold' : 'text-gray-500'
                     }`}>
                       {formatDate(mail.date)}
@@ -754,25 +756,25 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
 
           {/* Pagination */}
           {!isSearching && inboxTotalPages > 1 && (
-            <div className="p-4 border-t bg-gray-50 flex items-center justify-between">
-              <div className="text-sm text-gray-600 font-medium">
+            <div className="p-3 sm:p-4 border-t bg-gray-50 flex flex-col sm:flex-row items-center justify-between gap-2">
+              <div className="text-xs sm:text-sm text-gray-600 font-medium">
                 {inboxTotal} mail
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => loadInbox(inboxPage - 1)}
                   disabled={inboxPage <= 1}
-                  className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-100 transition-colors"
+                  className="px-2 sm:px-3 py-1 sm:py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm disabled:opacity-50 hover:bg-gray-100 transition-colors"
                 >
                   {t('previous')}
                 </button>
-                <span className="text-sm text-gray-700 font-medium px-2">
+                <span className="text-xs sm:text-sm text-gray-700 font-medium px-1 sm:px-2 min-w-[50px] text-center">
                   {inboxPage} / {inboxTotalPages}
                 </span>
                 <button
                   onClick={() => loadInbox(inboxPage + 1)}
                   disabled={inboxPage >= inboxTotalPages}
-                  className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm disabled:opacity-50 hover:bg-gray-100 transition-colors"
+                  className="px-2 sm:px-3 py-1 sm:py-1.5 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm disabled:opacity-50 hover:bg-gray-100 transition-colors"
                 >
                   {t('next')}
                 </button>
@@ -786,7 +788,7 @@ export default function MailManagement({ staffId, defaultView = 'inbox' }: MailM
       {viewMode === 'history' && !loading && (
         <div>
           {/* Search Bar - Same style as inbox */}
-          <div className="p-4 bg-gray-50 border-b flex items-center gap-4">
+          <div className="p-3 sm:p-4 bg-gray-50 border-b flex items-center gap-2 sm:gap-4">
             <div className="flex-1 flex items-center gap-2">
               <div className="flex-1 relative">
                 <input
