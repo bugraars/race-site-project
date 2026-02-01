@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   Route,
@@ -17,7 +17,6 @@ import {
   updateRoutePoint,
   deleteRoutePoint,
   reorderRoutePoints,
-  uploadRouteImage,
 } from '@/lib/adminApi';
 
 interface RouteManagementProps {
@@ -97,9 +96,6 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
   
   // Loading states
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load events on mount
   useEffect(() => {
@@ -268,27 +264,6 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
     });
     setActiveLang('tr');
     setShowPointModal(true);
-  };
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-    try {
-      const result = await uploadRouteImage(file);
-      if (result.success && result.data) {
-        setPointForm(prev => ({ ...prev, imageUrl: result.data!.url }));
-      } else {
-        onError?.(result.error || 'Görsel yüklenemedi');
-      }
-    } catch (error) {
-      onError?.('Görsel yükleme hatası');
-    }
-    setUploading(false);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
   };
 
   const handleSavePoint = async () => {
@@ -729,45 +704,33 @@ export default function RouteManagement({ onError }: RouteManagementProps) {
             </div>
 
             <div className="p-4 overflow-y-auto max-h-[calc(90vh-140px)] space-y-4">
-              {/* Image Upload */}
+              {/* Image URL */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">{t('route_image')}</label>
-                <div className="flex items-start gap-4">
-                  {pointForm.imageUrl ? (
-                    <div className="relative">
-                      <img src={pointForm.imageUrl} alt="Preview" className="w-24 h-18 object-cover rounded-lg border" />
+                <div className="flex items-center gap-3">
+                  {pointForm.imageUrl && (
+                    <div className="relative flex-shrink-0">
+                      <img src={pointForm.imageUrl} alt="Preview" className="w-16 h-12 object-cover rounded-lg border" />
                       <button
+                        type="button"
                         onClick={() => setPointForm(prev => ({ ...prev, imageUrl: '' }))}
-                        className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full"
+                        className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
-                  ) : (
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      className="w-24 h-18 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-red-500"
-                    >
-                      {uploading ? (
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-red-500"></div>
-                      ) : (
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      )}
-                    </div>
                   )}
-                  <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                   <input
                     type="text"
                     value={pointForm.imageUrl}
                     onChange={(e) => setPointForm(prev => ({ ...prev, imageUrl: e.target.value }))}
-                    placeholder="veya URL girin..."
+                    placeholder="Google Drive veya resim URL'si girin..."
                     className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm"
                   />
                 </div>
+                <p className="text-xs text-gray-500 mt-1">Google Drive linki kullanabilirsiniz</p>
               </div>
 
               {/* Coordinates */}
