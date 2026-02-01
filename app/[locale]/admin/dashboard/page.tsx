@@ -6,12 +6,12 @@ import { useTranslations } from 'next-intl';
 import AdminMenuBar from '@/app/Components/AdminMenuBar';
 import StaffManagement from '@/app/Components/admin/StaffManagement';
 import RacerManagement from '@/app/Components/admin/RacerManagement';
-import CheckpointManagement from '@/app/Components/admin/CheckpointManagement';
 import EventManagement from '@/app/Components/admin/EventManagement';
 import LogManagement from '@/app/Components/admin/LogManagement';
 import MailManagement from '@/app/Components/admin/MailManagement';
 import BulkMailManagement from '@/app/Components/admin/BulkMailManagement';
 import MailTemplateManagement from '@/app/Components/admin/MailTemplateManagement';
+import RouteManagement from '@/app/Components/admin/RouteManagement';
 import { Event, getEvents, getActiveEvent } from '@/lib/adminApi';
 
 interface AdminStaff {
@@ -101,7 +101,7 @@ export default function AdminDashboardPage() {
       const defaultSubMenus: Record<string, string> = {
         'staff': 'staff-list',
         'racers': 'racers-list',
-        'race': 'race-checkpoints',
+        'race': 'race-routes',
         'logs': 'logs-system',
         'mail': 'mail-inbox',
       };
@@ -177,28 +177,9 @@ export default function AdminDashboardPage() {
         return <EventManagement onEventSelect={handleEventSelect} onEventsChange={loadEvents} />;
       }
       
-      // Checkpoint yönetimi
-      if (selectedSubMenu === 'race-checkpoints' || !selectedSubMenu) {
-        const activeEvents = events.filter(e => e.isActive);
-        
-        if (activeEvents.length === 0 && !eventsLoading) {
-          return (
-            <div className="space-y-6">
-              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
-                <p className="text-yellow-800">{t('no_active_events')}</p>
-                <p className="text-sm text-yellow-600 mt-1">{t('activate_event_first')}</p>
-              </div>
-              <EventManagement onEventSelect={handleEventSelect} onEventsChange={loadEvents} />
-            </div>
-          );
-        }
-        
-        return (
-          <div className="space-y-4">
-            <EventSelector />
-            {selectedEvent && <CheckpointManagement eventId={selectedEvent.id} />}
-          </div>
-        );
+      // Rota yönetimi (checkpoint'ler de dahil)
+      if (selectedSubMenu === 'race-routes' || !selectedSubMenu) {
+        return <RouteManagement />;
       }
     }
 

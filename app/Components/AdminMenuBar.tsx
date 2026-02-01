@@ -51,7 +51,7 @@ const MENU_ITEMS: MenuItem[] = [
     ),
     subItems: [
       { key: "race-events", labelKey: "menu_race_events" },
-      { key: "race-checkpoints", labelKey: "menu_race_checkpoints" },
+      { key: "race-routes", labelKey: "menu_race_routes" },
     ],
   },
   {

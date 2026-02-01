@@ -7,6 +7,7 @@ import { useTranslations, useLocale } from 'next-intl';
 
 mapboxgl.accessToken = process.env.NEXT_MAPBOX_TOKEN || 'pk.eyJ1IjoiYnVncmFhcnMiLCJhIjoiY21qaWRpaDRzMWhwdjNocXhkOHVjN3YwayJ9.1uR9bKzPv-8zPhyzidNGkQ';
 
+const API_URL = 'https://t8wdcqtmvn.eu-central-1.awsapprunner.com/api';
 
 interface Checkpoint {
   id: number;
@@ -18,23 +19,142 @@ interface Checkpoint {
   desc: { tr: string; en: string; de: string; ru: string; };
 }
 
+interface Route {
+  id: number;
+  name: string;
+  description?: string;
+  points: Checkpoint[];
+}
+
+interface EventData {
+  id: number;
+  name: string;
+  date?: string;
+}
+
+// Skeleton Loading Component
+const MapSkeleton = () => (
+  <div className="relative w-full h-[600px] overflow-hidden bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl font-sans">
+    {/* Map area skeleton */}
+    <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 animate-pulse">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 mx-auto border-4 border-red-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-zinc-500 text-sm font-medium">Harita yükleniyor...</p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Skeleton markers */}
+    <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
+    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
+    <div className="absolute bottom-1/3 right-1/3 w-4 h-4 bg-zinc-700 rounded-full animate-pulse" />
+  </div>
+);
+
 const RaceMap = () => {
   const locale = useLocale() as "tr" | "en" | "de" | "ru";
   const t = useTranslations('Home');
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
   
-  const [checkpoints, setCheckpoints] = useState<Checkpoint[]>([]);
+  const [routes, setRoutes] = useState<Route[]>([]);
+  const [selectedRouteId, setSelectedRouteId] = useState<number | null>(null);
+  const [eventData, setEventData] = useState<EventData | null>(null);
   const [selectedPoint, setSelectedPoint] = useState<Checkpoint | null>(null);
   const [isStyleLoaded, setIsStyleLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Seçili rotanın noktaları
+  const currentRoute = routes.find(r => r.id === selectedRouteId);
+  const checkpoints = currentRoute?.points || [];
 
   useEffect(() => {
-    fetch('/data/checkpoints.json')
-      .then((res) => res.json())
-      .then((data) => setCheckpoints(data))
-      .catch((err) => console.error("JSON Error:", err));
+    const fetchRoutes = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_URL}/route/active`);
+        
+        if (res.status === 404) {
+          console.log("No active event found, using fallback data");
+          throw new Error('No active event');
+        }
+        
+        if (!res.ok) {
+          console.error(`API Error: ${res.status} ${res.statusText}`);
+          throw new Error('API Error');
+        }
+        
+        const data = await res.json();
+        
+        // Event bilgisi
+        if (data.event) {
+          setEventData(data.event);
+        }
+        
+        // Rotaları parse et
+        const parsedRoutes: Route[] = [];
+        if (data.routes && Array.isArray(data.routes)) {
+          data.routes.forEach((route: any) => {
+            const points: Checkpoint[] = [];
+            if (route.points && Array.isArray(route.points)) {
+              route.points.forEach((point: any) => {
+                points.push({
+                  id: point.id,
+                  coords: point.coords as [number, number],
+                  elevation: point.elevation || '0m',
+                  difficulty: point.difficulty || 1,
+                  img: point.img || '/img/default-checkpoint.jpg',
+                  title: point.title || { tr: '', en: '', de: '', ru: '' },
+                  desc: point.desc || { tr: '', en: '', de: '', ru: '' },
+                });
+              });
+            }
+            parsedRoutes.push({
+              id: route.id,
+              name: route.name,
+              description: route.description,
+              points,
+            });
+          });
+        }
+        
+        if (parsedRoutes.length === 0) {
+          console.log("No routes found, using fallback data");
+          throw new Error('No routes');
+        }
+        
+        setRoutes(parsedRoutes);
+        // İlk rotayı seç
+        setSelectedRouteId(parsedRoutes[0].id);
+        
+      } catch (err) {
+        console.log("Using fallback checkpoint data");
+        // Fallback: static JSON
+        try {
+          const fallbackRes = await fetch('/data/checkpoints.json');
+          const fallbackData = await fallbackRes.json();
+          // Fallback veriyi tek rota olarak sar
+          setRoutes([{
+            id: 0,
+            name: 'Rota',
+            points: fallbackData,
+          }]);
+          setSelectedRouteId(0);
+        } catch (fallbackErr) {
+          console.error("Fallback JSON Error:", fallbackErr);
+          setRoutes([]);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRoutes();
   }, []);
 
+  // Harita oluştur
   useEffect(() => {
     if (!mapContainerRef.current) return;
     const map = new mapboxgl.Map({
@@ -60,10 +180,16 @@ const RaceMap = () => {
     return () => map.remove();
   }, []);
 
+  // Rota değiştiğinde haritayı güncelle
   useEffect(() => {
     if (!mapRef.current || !isStyleLoaded || checkpoints.length === 0) return;
     const map = mapRef.current;
 
+    // Eski marker'ları temizle
+    markersRef.current.forEach(marker => marker.remove());
+    markersRef.current = [];
+
+    // Rota çizgisi
     const routeData: any = {
       type: 'Feature',
       geometry: {
@@ -84,22 +210,67 @@ const RaceMap = () => {
       });
     }
 
+    // Yeni marker'ları ekle
     checkpoints.forEach((point) => {
       const el = document.createElement('div');
       el.className = 'checkpoint-marker';
-      new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker(el)
         .setLngLat(point.coords)
-        .addTo(map)
-        .getElement()
-        .addEventListener('click', () => {
-          setSelectedPoint(point);
-          map.flyTo({ center: point.coords, zoom: 14, pitch: 70, duration: 2000 });
-        });
+        .addTo(map);
+      
+      marker.getElement().addEventListener('click', () => {
+        setSelectedPoint(point);
+        map.flyTo({ center: point.coords, zoom: 14, pitch: 70, duration: 2000 });
+      });
+      
+      markersRef.current.push(marker);
     });
-  }, [checkpoints, isStyleLoaded]);
+
+    // İlk noktaya zoom
+    if (checkpoints.length > 0) {
+      const bounds = new mapboxgl.LngLatBounds();
+      checkpoints.forEach(p => bounds.extend(p.coords));
+      map.fitBounds(bounds, { padding: 50, maxZoom: 13 });
+    }
+  }, [checkpoints, isStyleLoaded, selectedRouteId]);
+
+  // Loading durumunda skeleton göster
+  if (loading) {
+    return <MapSkeleton />;
+  }
 
   return (
     <div className="relative w-full h-[600px] overflow-hidden bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl font-sans">
+      {/* Rota Seçici - Üst kısımda */}
+      {routes.length > 1 && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 bg-black/70 backdrop-blur-md rounded-full p-1.5 border border-zinc-700/50">
+          {routes.map((route) => (
+            <button
+              key={route.id}
+              onClick={() => {
+                setSelectedRouteId(route.id);
+                setSelectedPoint(null);
+              }}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                selectedRouteId === route.id
+                  ? 'bg-red-500 text-white shadow-lg shadow-red-500/30'
+                  : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+              }`}
+            >
+              {route.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Event Adı - Sol üst */}
+      {eventData && (
+        <div className="absolute top-4 left-4 z-20 bg-black/70 backdrop-blur-md rounded-xl px-4 py-2 border border-zinc-700/50">
+          <p className="text-xs text-zinc-500 uppercase tracking-wider font-bold">{t('event')}</p>
+          <p className="text-white font-bold">{eventData.name}</p>
+        </div>
+      )}
+
       <div ref={mapContainerRef} className="w-full h-full" />
 
       <AnimatePresence>

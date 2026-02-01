@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "go": "npm run build && npm start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "start-dev": "next dev -p 3001"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",

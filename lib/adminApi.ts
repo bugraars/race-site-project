@@ -109,25 +109,6 @@ export interface Checkpoint {
   createdAt?: string;
 }
 
-export interface CreateCheckpointData {
-  eventId: number;
-  code: string;
-  name: string;
-  orderIndex: number;
-  latitude?: number;
-  longitude?: number;
-  imageUrl?: string;
-}
-
-export interface UpdateCheckpointData {
-  code?: string;
-  name?: string;
-  orderIndex?: number;
-  latitude?: number | null;
-  longitude?: number | null;
-  imageUrl?: string | null;
-}
-
 export interface Staff {
   id: number;
   staffCode: string;
@@ -234,53 +215,6 @@ export async function changeStaffPin(staffId: number, newPin: string): Promise<A
   return fetchAdminApi<{ message: string }>(`/auth/staff/${staffId}/pin`, {
     method: 'PUT',
     body: JSON.stringify({ newPin }),
-  });
-}
-
-// ==================== CHECKPOINT API ====================
-
-/**
- * Checkpoint detayını getir
- */
-export async function getCheckpointById(id: number): Promise<ApiResponse<Checkpoint>> {
-  return fetchAdminApi<Checkpoint>(`/events/checkpoints/${id}`);
-}
-
-/**
- * Yeni checkpoint oluştur
- */
-export async function createCheckpoint(data: CreateCheckpointData): Promise<ApiResponse<Checkpoint>> {
-  return fetchAdminApi<Checkpoint>('/events/checkpoints', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
-}
-
-/**
- * Checkpoint güncelle
- */
-export async function updateCheckpoint(id: number, data: UpdateCheckpointData): Promise<ApiResponse<Checkpoint>> {
-  return fetchAdminApi<Checkpoint>(`/events/checkpoints/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-  });
-}
-
-/**
- * Checkpoint sil
- */
-export async function deleteCheckpoint(id: number): Promise<ApiResponse<{ message: string }>> {
-  return fetchAdminApi<{ message: string }>(`/events/checkpoints/${id}`, {
-    method: 'DELETE',
-  });
-}
-
-/**
- * Event'e ait tüm checkpoint'leri sil
- */
-export async function deleteAllCheckpoints(eventId: number): Promise<ApiResponse<{ message: string; count: number }>> {
-  return fetchAdminApi<{ message: string; count: number }>(`/events/${eventId}/checkpoints`, {
-    method: 'DELETE',
   });
 }
 
@@ -1146,4 +1080,214 @@ export async function generateMailTemplatePreview(id: string, data: Record<strin
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+// ==================== ROUTE TYPES ====================
+
+export interface Route {
+  id: number;
+  eventId: number;
+  event?: Event;
+  name: string;
+  description: string | null;
+  orderIndex: number;
+  isActive: boolean;
+  routePoints?: RoutePoint[];
+  _count?: { routePoints: number };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RoutePoint {
+  id: number;
+  routeId: number;
+  route?: { id: number; name: string };
+  orderIndex: number;
+  longitude: number;
+  latitude: number;
+  elevation: string;
+  difficulty: number;
+  imageUrl: string | null;
+  title: string; // JSON string
+  description: string; // JSON string
+  isCheckpoint: boolean;
+  checkpointCode: string | null;
+  checkpointOrder: number | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RouteCreate {
+  eventId: number;
+  name: string;
+  description?: string;
+  orderIndex?: number;
+}
+
+export interface RouteUpdate {
+  name?: string;
+  description?: string;
+  orderIndex?: number;
+  isActive?: boolean;
+}
+
+export interface RoutePointCreate {
+  routeId: number;
+  orderIndex?: number;
+  longitude: number;
+  latitude: number;
+  elevation: string;
+  difficulty?: number;
+  imageUrl?: string;
+  title: { tr: string; en: string; de: string; ru: string };
+  description: { tr: string; en: string; de: string; ru: string };
+  isCheckpoint?: boolean;
+  checkpointCode?: string;
+  checkpointOrder?: number;
+}
+
+export interface RoutePointUpdate {
+  orderIndex?: number;
+  longitude?: number;
+  latitude?: number;
+  elevation?: string;
+  difficulty?: number;
+  imageUrl?: string | null;
+  title?: { tr: string; en: string; de: string; ru: string };
+  description?: { tr: string; en: string; de: string; ru: string };
+  isCheckpoint?: boolean;
+  checkpointCode?: string;
+  checkpointOrder?: number;
+  isActive?: boolean;
+}
+
+// ==================== ROUTE API ====================
+
+/**
+ * Tüm rotaları getir (event'e göre filtreleme opsiyonel)
+ */
+export async function getRoutes(eventId?: number): Promise<ApiResponse<Route[]>> {
+  const query = eventId ? `?eventId=${eventId}` : '';
+  return fetchAdminApi<Route[]>(`/route/admin/routes${query}`);
+}
+
+/**
+ * Tek rota detayı (noktalarıyla birlikte)
+ */
+export async function getRoute(id: number): Promise<ApiResponse<Route>> {
+  return fetchAdminApi<Route>(`/route/admin/routes/${id}`);
+}
+
+/**
+ * Yeni rota oluştur
+ */
+export async function createRoute(data: RouteCreate): Promise<ApiResponse<Route>> {
+  return fetchAdminApi<Route>('/route/admin/routes', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+/**
+ * Rota güncelle
+ */
+export async function updateRoute(id: number, data: RouteUpdate): Promise<ApiResponse<Route>> {
+  return fetchAdminApi<Route>(`/route/admin/routes/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+/**
+ * Rota sil
+ */
+export async function deleteRoute(id: number): Promise<ApiResponse<void>> {
+  return fetchAdminApi<void>(`/route/admin/routes/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+// ==================== ROUTE POINT API ====================
+
+/**
+ * Rotaya ait noktaları getir
+ */
+export async function getRoutePoints(routeId: number): Promise<ApiResponse<RoutePoint[]>> {
+  return fetchAdminApi<RoutePoint[]>(`/route/admin/points?routeId=${routeId}`);
+}
+
+/**
+ * Yeni rota noktası oluştur
+ */
+export async function createRoutePoint(data: RoutePointCreate): Promise<ApiResponse<RoutePoint>> {
+  return fetchAdminApi<RoutePoint>('/route/admin/points', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+/**
+ * Rota noktası güncelle
+ */
+export async function updateRoutePoint(id: number, data: RoutePointUpdate): Promise<ApiResponse<RoutePoint>> {
+  return fetchAdminApi<RoutePoint>(`/route/admin/points/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+/**
+ * Rota noktası sil
+ */
+export async function deleteRoutePoint(id: number): Promise<ApiResponse<void>> {
+  return fetchAdminApi<void>(`/route/admin/points/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+/**
+ * Rota noktası sıralamasını güncelle
+ */
+export async function reorderRoutePoints(orders: { id: number; orderIndex: number }[]): Promise<ApiResponse<void>> {
+  return fetchAdminApi<void>('/route/admin/points/reorder', {
+    method: 'POST',
+    body: JSON.stringify({ orders }),
+  });
+}
+
+/**
+ * Event'e ait checkpoint'leri getir (staff atama için)
+ */
+export async function getRouteCheckpointsByEvent(eventId: number): Promise<ApiResponse<RoutePoint[]>> {
+  return fetchAdminApi<RoutePoint[]>(`/route/admin/checkpoints?eventId=${eventId}`);
+}
+
+/**
+ * Görsel yükle
+ */
+export async function uploadRouteImage(file: File): Promise<ApiResponse<{ url: string; filename: string }>> {
+  try {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const response = await fetch(`${API_BASE_URL}/route/admin/upload`, {
+      method: 'POST',
+      headers: {
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { success: false, error: data.message || 'Görsel yüklenemedi' };
+    }
+
+    return { success: true, data: { url: data.url, filename: data.filename } };
+  } catch (error) {
+    return { success: false, error: 'Görsel yükleme hatası' };
+  }
 }
