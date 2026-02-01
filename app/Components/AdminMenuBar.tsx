@@ -26,7 +26,6 @@ const MENU_ITEMS: MenuItem[] = [
     ),
     subItems: [
       { key: "staff-list", labelKey: "menu_staff_list" },
-      { key: "staff-add", labelKey: "menu_staff_add" },
       { key: "staff-roles", labelKey: "menu_staff_roles" },
     ],
   },
@@ -40,9 +39,6 @@ const MENU_ITEMS: MenuItem[] = [
     ),
     subItems: [
       { key: "racers-list", labelKey: "menu_racers_list" },
-      { key: "racers-add", labelKey: "menu_racers_add" },
-      { key: "racers-bib", labelKey: "menu_racers_bib" },
-      { key: "racers-categories", labelKey: "menu_racers_categories" },
     ],
   },
   {
@@ -54,10 +50,8 @@ const MENU_ITEMS: MenuItem[] = [
       </svg>
     ),
     subItems: [
-      { key: "race-start", labelKey: "menu_race_start" },
+      { key: "race-events", labelKey: "menu_race_events" },
       { key: "race-checkpoints", labelKey: "menu_race_checkpoints" },
-      { key: "race-results", labelKey: "menu_race_results" },
-      { key: "race-live", labelKey: "menu_race_live" },
     ],
   },
   {
@@ -69,94 +63,22 @@ const MENU_ITEMS: MenuItem[] = [
       </svg>
     ),
     subItems: [
-      { key: "logs-nfc", labelKey: "menu_logs_nfc" },
       { key: "logs-system", labelKey: "menu_logs_system" },
-      { key: "logs-errors", labelKey: "menu_logs_errors" },
     ],
   },
   {
-    key: "souvenir",
-    labelKey: "menu_souvenir",
+    key: "mail",
+    labelKey: "menu_mail",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
     subItems: [
-      { key: "souvenir-generate", labelKey: "menu_souvenir_generate" },
-      { key: "souvenir-templates", labelKey: "menu_souvenir_templates" },
-      { key: "souvenir-history", labelKey: "menu_souvenir_history" },
-    ],
-  },
-  {
-    key: "settings",
-    labelKey: "menu_settings",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-    subItems: [
-      { key: "settings-general", labelKey: "menu_settings_general" },
-      { key: "settings-race", labelKey: "menu_settings_race" },
-      { key: "settings-nfc", labelKey: "menu_settings_nfc" },
-    ],
-  },
-  {
-    key: "sponsors",
-    labelKey: "menu_sponsors",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    subItems: [
-      { key: "sponsors-list", labelKey: "menu_sponsors_list" },
-      { key: "sponsors-add", labelKey: "menu_sponsors_add" },
-      { key: "sponsors-contracts", labelKey: "menu_sponsors_contracts" },
-    ],
-  },
-  {
-    key: "media",
-    labelKey: "menu_media",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
-    subItems: [
-      { key: "media-photos", labelKey: "menu_media_photos" },
-      { key: "media-videos", labelKey: "menu_media_videos" },
-      { key: "media-upload", labelKey: "menu_media_upload" },
-    ],
-  },
-  {
-    key: "reports",
-    labelKey: "menu_reports",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    subItems: [
-      { key: "reports-race", labelKey: "menu_reports_race" },
-      { key: "reports-finance", labelKey: "menu_reports_finance" },
-      { key: "reports-participants", labelKey: "menu_reports_participants" },
-    ],
-  },
-  {
-    key: "notifications",
-    labelKey: "menu_notifications",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-      </svg>
-    ),
-    subItems: [
-      { key: "notifications-send", labelKey: "menu_notifications_send" },
-      { key: "notifications-templates", labelKey: "menu_notifications_templates" },
-      { key: "notifications-history", labelKey: "menu_notifications_history" },
+      { key: "mail-inbox", labelKey: "menu_mail_inbox" },
+      { key: "mail-sent", labelKey: "menu_mail_sent" },
+      { key: "mail-bulk", labelKey: "menu_mail_bulk" },
+      { key: "mail-templates", labelKey: "menu_mail_templates" },
     ],
   },
 ];
@@ -296,7 +218,7 @@ export default function AdminMenuBar({ onSelect, selectedKey, selectedSubKey, on
                     className={`
                       px-3 py-1.5 text-sm rounded-lg whitespace-nowrap transition-colors duration-150 flex-shrink-0
                       ${selectedSubKey === subItem.key 
-                        ? "bg-red-100 text-red-600 font-medium" 
+                        ? "bg-red-500 text-white font-medium shadow-sm" 
                         : "text-gray-600 hover:bg-gray-100"
                       }
                     `}
