@@ -19,6 +19,24 @@ interface LogManagementProps {
 const LOG_LEVELS: LogLevel[] = ['DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL'];
 const LOG_CATEGORIES: LogCategory[] = ['AUTH', 'NFC_SCAN', 'SYNC', 'API', 'SYSTEM', 'ERROR'];
 
+// Yaygın action tipleri
+const LOG_ACTIONS: string[] = [
+  'LOGIN_SUCCESS',
+  'LOGIN_FAILED',
+  'ADMIN_LOGIN_EMAIL_SENT',
+  'API_REQUEST',
+  'TOKEN_VALIDATE',
+  'STAFF_CREATE',
+  'STAFF_UPDATE',
+  'RACER_CREATE',
+  'RACER_UPDATE',
+  'NFC_SCAN',
+  'SYNC_PRERACE',
+  'SYNC_RACE',
+  'EMAIL_SENT',
+  'EMAIL_FAILED',
+];
+
 const LEVEL_COLORS: Record<LogLevel, string> = {
   DEBUG: 'bg-gray-100 text-gray-600',
   INFO: 'bg-blue-100 text-blue-700',
@@ -50,6 +68,7 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
   const [traceIdFilter, setTraceIdFilter] = useState('');
   const [levelFilter, setLevelFilter] = useState<LogLevel | ''>('');
   const [categoryFilter, setCategoryFilter] = useState<LogCategory | ''>(defaultCategory || '');
+  const [actionFilter, setActionFilter] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [searchApplied, setSearchApplied] = useState(false);
@@ -75,6 +94,7 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
       if (!clearFilters) {
         if (levelFilter) filter.level = levelFilter;
         if (categoryFilter) filter.category = categoryFilter;
+        if (actionFilter) filter.action = actionFilter;
         if (startDate) filter.startDate = new Date(startDate).toISOString();
         if (endDate) filter.endDate = new Date(endDate + 'T23:59:59').toISOString();
       } else {
@@ -108,6 +128,7 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
     setTraceIdFilter('');
     setLevelFilter('');
     setCategoryFilter(defaultCategory || '');
+    setActionFilter('');
     setStartDate('');
     setEndDate('');
     setSearchApplied(false);
@@ -208,7 +229,7 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
             <h3 className="font-semibold text-gray-900">{t('logs_filters')}</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             {/* Level Filter */}
             <div>
               <label className="block text-xs font-medium text-gray-600 mb-1">
@@ -239,6 +260,23 @@ export default function LogManagement({ onError, defaultCategory }: LogManagemen
                 <option value="">{t('all')}</option>
                 {LOG_CATEGORIES.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Action Filter */}
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                {t('logs_action')}
+              </label>
+              <select
+                value={actionFilter}
+                onChange={(e) => setActionFilter(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              >
+                <option value="">{t('all')}</option>
+                {LOG_ACTIONS.map(action => (
+                  <option key={action} value={action}>{action}</option>
                 ))}
               </select>
             </div>
